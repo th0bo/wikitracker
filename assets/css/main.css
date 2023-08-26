@@ -1,0 +1,20 @@
+:root {
+  --red: #990000;
+  --green: #339966;
+  --blue: #006699;
+  --dark: #202122;
+  --light: #FFFFFF;
+}
+
+html {
+  font-family: sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: var(--dark);
+    color: var(--light);
+  }
+}
