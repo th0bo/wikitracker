@@ -3,37 +3,26 @@ defineProps(['current', 'target'])
 </script>
 
 <template>
-  <div>
-    <span>{{ current }}</span>
-    <span>{{ target }}</span>
-  </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+      <path fill-rule="evenodd" d="M 100 0 l 100 100 l -100 100 l -100 -100 Z M 100 10 l 42.5 42.5 l -90 90 l -42.5 -42.5 Z M 147.5 57.5 l 42.5 42.5 l -90 90 l -42.5 -42.5 Z" style="fill: #069;"/>
+      <text x="75" y="75" font-size="50" dominant-baseline="central" class="score">{{ current }}</text>
+      <!-- <circle cx="75" cy="75" color="red" r="10"></circle> -->
+      <text x="125" y="125" font-size="50" dominant-baseline="central" class="target">{{ target }}</text>
+    </svg>
 </template>
 
 <style scoped>
-div {
-  position: relative;
-  width: 14vh;
-  aspect-ratio: 1 / 1;
-  background-image: url(../assets/svg/score-frame.svg);
-  background-size: cover;
+svg {
+  aspect-ratio: 1/1;
 }
-span {
-  position: absolute;
-  width: 10.5vh;
-  aspect-ratio: 1 / 1;
-  line-height: 10.5vh;
-  size: 4.2vh;
-  text-align: center;
+text {
+  text-anchor: middle;
   font-weight: 600;
 }
-span:first-child {
-  top: 0;
-  left: 0;
-  color: var(--green);
+text.score {
+  fill: var(--green);
 }
-span:last-child {
-  bottom: 0;
-  right: 0;
-  color: var(--red);
+text.target {
+  fill: var(--red);
 }
 </style>
