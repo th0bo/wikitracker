@@ -34,16 +34,18 @@ const handleClick = () => {
 </script>
 
 <template>
-    <button @click="handleClick" :class="{ unclickable: zooming }">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-        <path class="frame" d="M 100 0 l 100 100 l -100 100 l -100 -100 Z M 100 10 l 90 90 l -90 90 l -90 -90 Z"></path>
-        <g>
-          <rect :class="{ zooming: zooming }" x="90" y="90" width="20" height="20" transform-origin="100 100"></rect>
-          <path class="right arrow" :class="{ shrinked: direction !== 1 }" stroke-width="10" transform-origin="100 100"></path>
-          <path class="left arrow" :class="{ shrinked: direction !== -1 }" stroke-width="10" transform-origin="100 100"></path>
-        </g>
-      </svg>
-    </button>
+  <button @click="handleClick" :class="{ unclickable: zooming }">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+      <path class="frame" d="M 100 0 l 100 100 l -100 100 l -100 -100 Z M 100 10 l 90 90 l -90 90 l -90 -90 Z"></path>
+      <g>
+        <rect :class="{ zooming: zooming }" x="90" y="90" width="20" height="20" transform-origin="100 100"></rect>
+        <path class="right arrow" :class="{ shrinked: direction !== 1 }" stroke-width="10" transform-origin="100 100">
+        </path>
+        <path class="left arrow" :class="{ shrinked: direction !== -1 }" stroke-width="10" transform-origin="100 100">
+        </path>
+      </g>
+    </svg>
+  </button>
 </template>
 
 <style scoped>
@@ -51,6 +53,7 @@ button {
   all: unset;
   cursor: pointer;
 }
+
 button.unclickable {
   pointer-events: none;
   cursor: wait;
@@ -99,5 +102,4 @@ rect.zooming {
 
 .shrinked {
   d: path("M 120 90 l 10 10 l -10 10");
-}
-</style>
+}</style>
