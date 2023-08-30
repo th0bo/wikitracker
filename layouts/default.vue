@@ -2,8 +2,9 @@
   <div>
     <header>
       <NuxtLink to="/">Home</NuxtLink>
-      <Distance target="8" current="5"></Distance>
-      <Direction width="200px"></Direction>
+      <Home></Home>
+      <Distance target="89" current="25"></Distance>
+      <Direction></Direction>
     </header>
     <slot />
     <NuxtLink to="/about">About</NuxtLink>
@@ -12,6 +13,7 @@
 
 <style scoped>
 header > * {
+  display: inline-block;
   width: 200px;
 }
 </style>
