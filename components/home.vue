@@ -16,6 +16,7 @@
 <style scoped>
 svg {
   aspect-ratio: 1/1;
+  height: 100%;
 }
 
 .edges {

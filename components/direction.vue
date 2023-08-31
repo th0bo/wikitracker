@@ -60,8 +60,8 @@ button.unclickable {
 }
 
 svg {
-  width: auto;
   aspect-ratio: 1/1;
+  height: 100%;
 }
 
 .frame {
