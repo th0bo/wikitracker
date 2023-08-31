@@ -52,6 +52,7 @@ const handleClick = () => {
 button {
   all: unset;
   cursor: pointer;
+  width: fit-content;
 }
 
 button.unclickable {
