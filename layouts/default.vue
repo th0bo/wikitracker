@@ -26,7 +26,8 @@ header > * {
   width: 98vw;
   margin: 1vh 1vw;
   display: grid;
-  grid-gap: 1vw;
+  column-gap: 1vw;
+  row-gap: 1vh;
   grid-template-columns: 1fr;
   grid-template-rows: min-content auto;
 }
@@ -34,7 +35,7 @@ header > * {
 header {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-gap: 1vw;
+  column-gap: inherit;
 }
 
 @media (orientation: landscape) {
@@ -46,6 +47,8 @@ header {
   header {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(6, 1fr);
+    column-gap: unset;
+    row-gap: inherit;
   }
 }
 </style>
