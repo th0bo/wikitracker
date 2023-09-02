@@ -16,14 +16,17 @@ defineProps(['propertyName', 'propertyDisplay', 'itemId', 'itemDisplay']);
   grid-template-columns: 0 7fr;
 }
 
-@media (orientation: landscape) {
-  .line {
-    grid-template-columns: 5fr 7fr;
-    column-gap: 24px;
-  }
-}
-
 .property {
   text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 420px) {
+  .line {
+    grid-template-columns: 5fr 7fr;
+    column-gap: 32px;
+  }
 }
 </style>
