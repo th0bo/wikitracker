@@ -3,6 +3,9 @@
     <Home></Home>
     <Distance target="89" current="25"></Distance>
     <Direction></Direction>
+    <div></div>
+    <Information></Information>
+    <Wikidata></Wikidata>
   </header>
 </template>
 
