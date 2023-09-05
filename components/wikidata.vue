@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink to="/about">
+  <NuxtLink to="https://www.wikidata.org/wiki/Wikidata:Main_Page">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 270">
       <path fill-rule="evenodd"
         d="M 135 0 l 135 135 l -135 135 l -135 -135 z M 135 13.5 l 121.5 121.5 l -121.5 121.5 l -121.5 -121.5 z"

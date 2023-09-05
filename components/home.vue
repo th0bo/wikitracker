@@ -1,5 +1,9 @@
+<script setup>
+const localePath = useLocalePath();
+</script>
+
 <template>
-  <NuxtLink to="/">
+  <NuxtLink :to="localePath('index')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
       <path class="edges" stroke-width="10"></path>
       <g class="nodes">

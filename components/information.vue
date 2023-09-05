@@ -1,5 +1,9 @@
+<script setup>
+const localePath = useLocalePath();
+</script>
+
 <template>
-  <NuxtLink to="/about">
+  <NuxtLink :to="localePath('about')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
       <path fill-rule="evenodd" d="M 100 0 l 100 100 l -100 100 l -100 -100 Z M 100 10 l 90 90 l -90 90 l -90 -90 Z"
         style="fill: #069;" />
