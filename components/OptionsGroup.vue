@@ -1,10 +1,11 @@
-<script setup>
-const { data } = defineProps(['data']);
+<script setup lang="ts">
+import { Binding } from 'types/wikidata';
+
+const { data } = defineProps({ data: Array }) as { data: Binding[] };
 const bodyOptions = [...data];
-const headerOption = bodyOptions.shift();
+const headerOption = bodyOptions.shift() as Binding;
 const footerOption = bodyOptions.pop();
 const propertyLabel = headerOption.label2.value;
-
 </script>
 
 <template>

@@ -1,5 +1,5 @@
-<script setup>
-defineProps(['propertyName', 'propertyDisplay', 'itemId', 'itemDisplay']);
+<script setup lang="ts">
+defineProps({ propertyName: String, propertyDisplay: String, itemId: String, itemDisplay: String });
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <template>
   <header>
     <Home></Home>
-    <Distance target="89" current="25"></Distance>
+    <Distance :target="89" :current="25"></Distance>
     <Direction></Direction>
     <div></div>
     <Information></Information>

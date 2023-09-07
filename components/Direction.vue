@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const timeUnit = 800;
 let loading = false;
 
