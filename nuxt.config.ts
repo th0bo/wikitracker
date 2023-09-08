@@ -28,7 +28,19 @@ export default defineNuxtConfig({
             iso: 'fr-FR',
             name: 'Français',
             file: 'fr.json'
-          }
+          },
+          {
+            code: 'es',
+            iso: 'es-ES',
+            name: 'Español',
+            file: 'es.json'
+          },
+          {
+            code: 'ja',
+            iso: 'ja-JA',
+            name: '日本語',
+            file: 'ja.json'
+          },
         ],
         // trailingSlash: true,
         debug: false,
