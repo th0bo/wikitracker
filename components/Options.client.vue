@@ -1,7 +1,32 @@
 <script setup lang="ts">
 import { OptionsQueryData, Binding } from 'types/wikidata';
 
-const url = `https://query.wikidata.org/sparql?query=SELECT%20?label1%20?item%20?label2%20?prop%20?p%20WHERE%20%7B%0A%20%20%20%20%20%20%20%20wd:Q161904%20?prop%20?item.%0A%20%20%20%20%20%20%20%20?item%20rdfs:label%20?label1.%0A%20%20%20%20%20%20%20%20?p%20wikibase:directClaim%20?prop.%0A%20%20%20%20%20%20%20%20?p%20rdfs:label%20?label2.%0A%20%20%20%20%20%20%20%20FILTER(LANG(?label1)%20=%20%22fr%22).%0A%20%20%20%20%20%20%20%20FILTER(LANG(?label2)%20=%20%22fr%22).%0A%20%20%20%20%7D&format=json`;
+const { forward, item } = defineProps({
+  forward: {
+    type: Boolean,
+    required: true,
+  },
+  item: {
+    type: String,
+    required: true,
+  }
+});
+
+const locale = useI18n().locale.value;
+
+const relation = forward ? `wd:${item} ?prop ?item.` : `?item ?prop wd:${item}.`;
+const query =
+`SELECT
+  ?label1 ?item ?label2 ?prop ?p
+WHERE {
+  ${relation}
+  ?item rdfs:label ?label1.
+  ?p wikibase:directClaim ?prop.
+  ?p rdfs:label ?label2.
+  FILTER(LANG(?label1) = "${locale}").
+  FILTER(LANG(?label2) = "${locale}").
+}`;
+const url = `https://query.wikidata.org/sparql?query=${encodeURI(query)}&format=json`;
 
 const { data: optionsGroups } = await useFetch(url, {
   transform: (data: OptionsQueryData) => {
