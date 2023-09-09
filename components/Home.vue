@@ -1,9 +1,5 @@
-<script setup lang="ts">
-const localePath = useLocalePath();
-</script>
-
 <template>
-  <NuxtLink :to="localePath('index')">
+  <NuxtLinkLocale to="index">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
       <path class="edges" stroke-width="10"></path>
       <g class="nodes">
@@ -14,7 +10,7 @@ const localePath = useLocalePath();
         <path transform-origin="100 100"></path>
       </g>
     </svg>
-  </NuxtLink>
+  </NuxtLinkLocale>
 </template>
 
 <style scoped>
