@@ -1,21 +1,15 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+app: {
+    baseURL: process.env.NODE_ENV === 'production' ? '/wikitracker/' : '',
+  },
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   modules: [
     [
       '@nuxtjs/i18n',
       {
-        experimental: {
-          jsTsFormatResource: true
-        },
-        compilation: {
-          strictMessage: false,
-          escapeHtml: true
-        },
         langDir: 'locales',
-        lazy: false,
-        baseUrl: 'http://localhost:3000',
+        lazy: true,
         locales: [
           {
             code: 'en',
@@ -42,29 +36,22 @@ export default defineNuxtConfig({
             file: 'ja.json'
           },
         ],
-        // trailingSlash: true,
         debug: false,
         defaultLocale: 'en',
-        // strategy: 'no_prefix',
-        // strategy: 'prefix',
-        // strategy: 'prefix_and_default',
         strategy: 'prefix',
-        // rootRedirect: '/ja/about-ja',
-        // dynamicRouteParams: true,
-        // customRoutes: 'config',
         pages: {},
-        // differentDomains: true,
-        // skipSettingLocaleOnNavigate: true,
-        // detectBrowserLanguage: false,
-        // detectBrowserLanguage: {
-        //   useCookie: true
-        //   // alwaysRedirect: true
-        //   // cookieKey: 'i18n_redirected',
-        //   // // cookieKey: 'my_custom_cookie_name',
-        //   // redirectOn: 'root'
-        // },
+        detectBrowserLanguage: {
+          alwaysRedirect: false,
+          fallbackLocale: 'en',
+          redirectOn: 'root',
+          useCookie: true,
+          cookieCrossOrigin: false,
+          cookieDomain: null,
+          cookieKey: 'i18n_redirected',
+          cookieSecure: false
+        }
         // vueI18n: './vue-i18n.options.ts'
       }
     ],
   ]
-})
+});
