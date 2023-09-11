@@ -2,7 +2,7 @@
   <div class="wrapper">
     <Header></Header>
     <main>
-      <Breadcrumb></Breadcrumb>
+      <div></div>
       <slot />
     </main>
   </div>

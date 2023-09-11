@@ -1,18 +1,10 @@
-export interface OptionsQueryData {
+export interface QueryData<Binding> {
   head: Head;
-  results: Results;
+  results: Results<Binding>;
 }
 
-export interface Results {
+export interface Results<Binding> {
   bindings: Binding[];
-}
-
-export interface Binding {
-  prop: Prop;
-  item: Prop;
-  p: Prop;
-  label1: Label1;
-  label2: Label1;
 }
 
 export interface Label1 {
@@ -29,3 +21,23 @@ export interface Prop {
 export interface Head {
   vars: string[];
 }
+
+export interface OptionsBinding {
+  prop: Prop;
+  item: Prop;
+  p: Prop;
+  label1: Label1;
+  label2: Label1;
+}
+
+export type OptionsQueryData = QueryData<OptionsBinding>;
+
+export interface EndsBinding {
+  item: {
+    type: "uri",
+    value: string
+  }
+  label: Label1;
+}
+
+export type EndsQueryData = QueryData<EndsBinding>;
