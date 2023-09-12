@@ -19,9 +19,8 @@ WHERE {
   FILTER(LANG(?label1) = "${locale}").
   FILTER(LANG(?label2) = "${locale}").
 }`;
-const url = `https://query.wikidata.org/sparql?query=${encodeURI(query)}&format=json`;
 
-const { data: optionsGroups } = await useFetch(url, {
+const { data: optionsGroups } = await useFetch(buildSparqlRequest(query), {
   transform: (data: OptionsQueryData) => {
     const bindings = data.results.bindings;
 

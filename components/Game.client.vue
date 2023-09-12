@@ -5,14 +5,13 @@ import { EndsQueryData } from 'types/wikidata';
 const { startId, endId, locale } = defineProps<{ startId: string, endId: string, locale: string }>();
 
 const query =
-  `SELECT ?item ?label WHERE {
+`SELECT ?item ?label WHERE {
   VALUES ?item {  wd:${startId} wd:${endId} }
   ?item rdfs:label ?label.
   FILTER(LANG(?label) = "${locale}")
 }`;
-const url = `https://query.wikidata.org/sparql?query=${encodeURI(query)}&format=json`;
 
-const { data } = await useFetch(url, {
+const { data } = await useFetch(buildSparqlRequest(query), {
   transform: (data: EndsQueryData) => {
     let startLabel: string | null = null;
     let endLabel: string | null = null;

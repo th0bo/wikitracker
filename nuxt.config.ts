@@ -1,5 +1,8 @@
 export default defineNuxtConfig({
-app: {
+  imports: {
+    dirs: ['utils'],
+  },
+  app: {
     baseURL: process.env.NODE_ENV === 'production' ? '/wikitracker/' : '',
   },
   devtools: { enabled: true },

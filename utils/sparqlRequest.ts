@@ -1,0 +1,1 @@
+export const buildSparqlRequest = (sparqlQuery: string) => `https://query.wikidata.org/sparql?query=${encodeURI(sparqlQuery)}&format=json`;
