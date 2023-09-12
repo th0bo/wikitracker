@@ -2,13 +2,12 @@
 definePageMeta({ layout: false });
 
 const { start, end } = useRoute().params as { [key: string]: string };
-
 const locale = useI18n().locale.value;
 </script>
 
 <template>
   <div class="wrapper">
-    <Game :start-id="start" :end-id="end" :locale="locale"></Game>
+    <Game :start-id="start" :end-id="end" :locale="locale" :key="[start, end, locale].join('-')"></Game>
   </div>
 </template>
 

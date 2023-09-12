@@ -61,7 +61,7 @@ const current = computed(() => {
 <template>
   <Header></Header>
   <main>
-    <Breadcrumb v-if="data" @step-back="i => index = i" :start="data.start" :steps="steps" :end="data.end" :forward="forward"></Breadcrumb>
-    <Options :forward="forward" :item="current" :key="current + forward"></Options>
+    <Breadcrumb v-if="data" @step-back="i => index = i" :start="data.start" :steps="steps" :end="data.end" :forward="forward" :key="[forward, data.start, ...steps, data.end].join('_')"></Breadcrumb>
+    <Options :forward="forward" :item="current" :key="[current, forward].join('_')"></Options>
   </main>
 </template>
