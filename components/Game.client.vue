@@ -45,23 +45,31 @@ const { data } = await useFetch(buildSparqlRequest(query), {
 const steps = ref([
   { forward: true, id: 'Q3', label: 'vie', url: '' },
   { forward: true, id: 'Q4', label: 'mort', url: '' },
-  { forward: false, id: 'Q5', label: 'être humain', url: '' },
-  { forward: true, id: 'Q20', label: 'Norvège', url: '' },
+  { forward: true, id: 'Q5', label: 'être humain', url: '' },
+  { forward: false, id: 'Q20', label: 'Norvège', url: '' },
 
 ] as Step[]);
 const index = ref(0);
-const forward = ref(true);
 
 const current = computed(() => {
-  console.log([startId, ...steps.value.map(({ id }) => id)][index.value]);
-  return [startId, ...steps.value.map(({ id }) => id)][index.value];
+  const value = [{ id: startId, forward: true }, ...steps.value][index.value];
+  console.log(value);
+  return value;
 });
 </script>
 
 <template>
   <Header></Header>
   <main>
-    <Breadcrumb v-if="data" @step-back="i => index = i" :start="data.start" :steps="steps" :end="data.end" :forward="forward" :key="[forward, data.start, ...steps, data.end].join('_')"></Breadcrumb>
-    <Options :forward="forward" :item="current" :key="[current, forward].join('_')"></Options>
+    <Breadcrumb
+      v-if="data"
+      @step-back="i => index = i"
+      :start="data.start"
+      :steps="steps"
+      :end="data.end"
+      :forward="current.forward"
+      :key="[current.forward, data.start, ...steps, data.end].join('_')"
+      ></Breadcrumb>
+    <Options :forward="current.forward" :item="current.id" :key="[current.id, current.forward].join('_')"></Options>
   </main>
 </template>
