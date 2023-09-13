@@ -53,7 +53,6 @@ const index = ref(0);
 
 const current = computed(() => {
   const value = [{ id: startId, forward: true }, ...steps.value][index.value];
-  console.log(value);
   return value;
 });
 </script>

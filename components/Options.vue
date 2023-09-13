@@ -3,8 +3,6 @@ import { OptionsQueryData, OptionsBinding } from 'types/wikidata';
 
 const { forward, item } = defineProps<{ forward: boolean, item: string }>();
 
-console.log(item);
-
 const locale = useI18n().locale.value;
 
 const relation = forward ? `wd:${item} ?prop ?item.` : `?item ?prop wd:${item}.`;
