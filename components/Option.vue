@@ -1,18 +1,27 @@
 <script setup lang="ts">
-defineProps<{
-  propertyName: string,
-  propertyDisplay: string,
-  itemId: string,
-  itemDisplay: string,
+const { property, backward, position } = defineProps<{
+  property: { id: string, url: string, name: string },
+  item: { id: string, url: string, name: string },
   backward: boolean,
+  position: 'header' | 'body' | 'footer',
 }>();
+const propertyDisplay = (() => {
+  switch (position) {
+    case 'header':
+      return property.name;
+    case 'body':
+      return backward ? '─┤' : '├─';
+    case 'footer':
+      return backward ? '─┘' : '└─';
+  }
+})();
 </script>
 
 <template>
   <div class="line" :class=" { 'backward': backward }">
-    <div v-if="!backward" class="property" v-bind:aria-label="propertyName">{{ propertyDisplay }}</div>
-    <div class="item">{{ itemDisplay }}</div>
-    <div v-if="backward" class="property" v-bind:aria-label="propertyName">{{ propertyDisplay }}</div>
+    <div v-if="!backward" class="property" v-bind:aria-label="property.name">{{ propertyDisplay }}</div>
+    <div class="item">{{ item.name }}</div>
+    <div v-if="backward" class="property" v-bind:aria-label="property.name">{{ propertyDisplay }}</div>
   </div>
 </template>
 
@@ -26,7 +35,7 @@ defineProps<{
 }
 
 .property {
-  text-align: right;
+  text-align: end;
   overflow: hidden;
 }
 
@@ -34,10 +43,10 @@ defineProps<{
   grid-template-columns: 7 0fr;
 }
 .backward .property {
-  text-align: left;
+  text-align: start;
 }
 .backward .item {
-  text-align: right;
+  text-align: end;
 }
 
 @media (min-width: 420px) {
