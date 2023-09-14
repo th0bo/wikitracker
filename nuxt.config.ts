@@ -38,6 +38,12 @@ export default defineNuxtConfig({
             name: '日本語',
             file: 'ja.json'
           },
+          {
+            code: 'ko',
+            iso: 'ko',
+            name: '한국어',
+            file: 'ko.json'
+          },
         ],
         debug: false,
         defaultLocale: 'en',
