@@ -30,17 +30,20 @@ const propertyDisplay = (() => {
   font-size: 20px;
   display: grid;
   grid-template-columns: 0 7fr;
-  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.line > * {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .property {
   text-align: end;
-  overflow: hidden;
 }
 
 .backward.line {
-  grid-template-columns: 7 0fr;
+  grid-template-columns: 7fr 0;
 }
 .backward .property {
   text-align: start;
