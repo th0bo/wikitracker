@@ -47,7 +47,6 @@ const steps = ref([
   { forward: true, id: 'Q4', label: 'mort', url: '' },
   { forward: true, id: 'Q5', label: 'être humain', url: '' },
   { forward: false, id: 'Q20', label: 'Norvège', url: '' },
-
 ] as Step[]);
 const index = ref(0);
 
@@ -62,13 +61,18 @@ const current = computed(() => {
   <main>
     <Breadcrumb
       v-if="data"
-      @step-back="i => index = i"
+      @step-back="(i: number) => index = i"
       :start="data.start"
       :steps="steps"
       :end="data.end"
       :forward="current.forward"
       :key="[current.forward, data.start, ...steps, data.end].join('_')"
       ></Breadcrumb>
-    <Options :forward="current.forward" :item="current.id" :key="[current.id, current.forward].join('_')"></Options>
+    <Options
+      @step-advance="(step: Step) => { steps.push(step); index++; }"
+      :forward="current.forward"
+      :item="current.id"
+      :key="[current.id, current.forward].join('_')"
+      ></Options>
   </main>
 </template>

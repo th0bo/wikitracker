@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const { property, backward, position } = defineProps<{
-  property: { id: string, url: string, name: string },
-  item: { id: string, url: string, name: string },
+  property: { id: string, url: string, label: string },
+  item: { id: string, url: string, label: string },
   backward: boolean,
   position: 'header' | 'body' | 'footer',
 }>();
 const propertyDisplay = (() => {
   switch (position) {
     case 'header':
-      return property.name;
+      return property.label;
     case 'body':
       return backward ? '─┤' : '├─';
     case 'footer':
@@ -18,10 +18,10 @@ const propertyDisplay = (() => {
 </script>
 
 <template>
-  <div class="line" :class=" { 'backward': backward }">
-    <div v-if="!backward" class="property" v-bind:aria-label="property.name">{{ propertyDisplay }}</div>
-    <div class="item">{{ item.name }}</div>
-    <div v-if="backward" class="property" v-bind:aria-label="property.name">{{ propertyDisplay }}</div>
+  <div @click="$emit('step-advance', { forward: !backward, ...item });" class="line" :class=" { 'backward': backward }">
+    <div v-if="!backward" class="property" v-bind:aria-label="property.label">{{ propertyDisplay }}</div>
+    <div class="item">{{ item.label }}</div>
+    <div v-if="backward" class="property" v-bind:aria-label="property.label">{{ propertyDisplay }}</div>
   </div>
 </template>
 
