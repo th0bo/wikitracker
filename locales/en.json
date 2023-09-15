@@ -12,5 +12,7 @@
   "index": "Index Page",
   "welcome": "Bienvenue",
   "hello": "Bonjour {name} !",
+  "congrats": "Congratulations !",
+  "sharePath": "URL of the game",
   "items": []
 }

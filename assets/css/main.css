@@ -4,6 +4,8 @@
   --blue: #006699;
   --dark: #202122;
   --light: #FFFFFF;
+  --background: var(--light);
+  --text: var(--dark);
 }
 
 html {
@@ -13,8 +15,12 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
-    background-color: var(--dark);
-    color: var(--light);
+  :root {
+    --background: var(--dark);
+    --text: var(--light);
   }
+}
+html {
+  background-color: var(--background);
+  color: var(--text);
 }
