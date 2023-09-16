@@ -14,5 +14,6 @@
   "hello": "Bonjour {name} !",
   "congrats": "Félicitations !",
   "sharePath": "URL de la partie",
+  "nothing": "Rien à voir ici",
   "items": []
 }

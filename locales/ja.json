@@ -14,5 +14,6 @@
   "hello": "Bonjour {name} !",
   "congrats": "Félicitations !",
   "sharePath": "URL of the game",
+  "nothing": "ここには何も見当たりません",
   "items": []
 }
