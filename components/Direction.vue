@@ -2,8 +2,10 @@
 const timeUnit = 800;
 let loading = false;
 
+const { backward } = defineProps<{ backward: boolean }>();
+
 const zooming = ref(false);
-const direction = ref(1);
+const direction = ref(backward ? -1 : 1);
 
 const queryData = () => {
   loading = true;
@@ -34,7 +36,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <button @click="handleClick" :class="{ unclickable: zooming }">
+  <button @click="$emit('toggle-backward'); handleClick();" :class="{ unclickable: zooming }">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
       <path class="frame" d="M 100 0 l 100 100 l -100 100 l -100 -100 Z M 100 10 l 90 90 l -90 90 l -90 -90 Z"></path>
       <g>

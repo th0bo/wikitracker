@@ -45,12 +45,23 @@ const { data } = await useFetch(buildSparqlRequest(query), {
 const steps = ref([] as Step[]);
 const index = ref(0);
 
-const current = computed(() => {
+const current = computed<{ id: string, forward: boolean }>(() => {
   const value = [{ id: startId, forward: true }, ...steps.value][index.value];
   return value;
 });
 
+const backward = ref(!current.value.forward);
+
 const won = computed(() => current.value.id === endId);
+
+watch(current, (newCurrentValue, oldCurrentValue) => {
+  const nextStep = steps.value[index.value];
+  if (nextStep !== undefined) {
+    backward.value = !nextStep.forward; 
+  } else {
+    backward.value = !current.value.forward;
+  }
+});
 
 </script>
 
@@ -58,7 +69,10 @@ const won = computed(() => current.value.id === endId);
   <EndModal
     v-if="won"
     :steps="steps"></EndModal>
-  <Header></Header>
+  <Header
+    @toggle-backward="backward = !backward"
+    :backward="backward"
+    ></Header>
   <main>
     <Breadcrumb
       v-if="data"
@@ -66,14 +80,14 @@ const won = computed(() => current.value.id === endId);
       :start="data.start"
       :steps="steps"
       :end="data.end"
-      :forward="current.forward"
+      :forward="!backward"
       :key="[current.forward, data.start, ...steps, data.end].join('_')"
       ></Breadcrumb>
     <Options
       @step-advance="(step: Step) => { steps = [...steps.slice(0, index), step]; index++; }"
-      :forward="current.forward"
+      :forward="!backward"
       :item="current.id"
-      :key="[current.id, current.forward].join('_')"
+      :key="[current.id, !backward].join('_')"
       ></Options>
   </main>
 </template>

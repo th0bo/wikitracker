@@ -1,8 +1,19 @@
+<script setup lang="ts">
+const { backward } = defineProps<{ backward: boolean }>();
+</script>
+
 <template>
   <header>
     <Home></Home>
-    <Distance :target="89" :current="25"></Distance>
-    <Direction></Direction>
+    <Distance
+      :target="89"
+      :current="25"
+      ></Distance>
+    <Direction
+      @toggle-backward="() => $emit('toggle-backward')"
+      :backward="backward"
+      :key="[backward].join('_')"
+      ></Direction>
     <div></div>
     <Information></Information>
     <Wikidata></Wikidata>
