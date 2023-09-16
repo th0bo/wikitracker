@@ -91,3 +91,10 @@ watch(current, (newCurrentValue, oldCurrentValue) => {
       ></Options>
   </main>
 </template>
+
+<style scoped>
+main {
+  display: grid;
+  grid-template-rows: min-content auto;
+}
+</style>

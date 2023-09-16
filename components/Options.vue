@@ -47,3 +47,9 @@ const { data: optionsGroups } = await useFetch(buildSparqlRequest(query), {
       ></OptionsGroup>
   </div>
 </template>
+
+<style scoped>
+div {
+  overflow-y: auto;
+}
+</style>
