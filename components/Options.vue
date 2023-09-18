@@ -7,7 +7,7 @@ const locale = useI18n().locale.value;
 
 const relation = forward ? `wd:${item} ?prop ?item.` : `?item ?prop wd:${item}.`;
 const query =
-`SELECT
+  `SELECT
   ?label1 ?item ?label2 ?prop ?p
 WHERE {
   ${relation}
@@ -39,17 +39,11 @@ const { data: optionsGroups } = await useFetch(buildSparqlRequest(query), {
 
 <template>
   <div>
-    <div
-      v-if="optionsGroups !== null && optionsGroups.length === 0"
-      >
-      {{  $t('nothing') }}
+    <div v-if="optionsGroups !== null && optionsGroups.length === 0">
+      {{ $t('nothing') }}
     </div>
-    <OptionsGroup
-      v-for="optionsGroup in optionsGroups"
-      @step-advance="step => $emit('step-advance', step)"
-      :data="optionsGroup"
-      :backward="!forward"
-      ></OptionsGroup>
+    <OptionsGroup v-for="optionsGroup in optionsGroups" @step-advance="step => $emit('step-advance', step)"
+      :data="optionsGroup" :backward="!forward"></OptionsGroup>
   </div>
 </template>
 

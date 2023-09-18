@@ -18,7 +18,8 @@ const propertyDisplay = (() => {
 </script>
 
 <template>
-  <div @click="$emit('step-advance', { forward: !backward, ...item });" class="line" :class=" { 'backward': backward }">
+  <div @click="$emit('step-advance', { forward: !backward, ...item });" class="line" :class="{ 'backward': backward }"
+    tabindex="0">
     <div v-if="!backward" class="property" v-bind:aria-label="property.label">{{ propertyDisplay }}</div>
     <div class="item">{{ item.label }}</div>
     <div v-if="backward" class="property" v-bind:aria-label="property.label">{{ propertyDisplay }}</div>
@@ -31,9 +32,14 @@ const propertyDisplay = (() => {
   display: grid;
   grid-template-columns: 0 7fr;
   white-space: nowrap;
+  cursor: pointer;
 }
 
-.line > * {
+.line:hover .item {
+  text-decoration: underline;
+}
+
+.line>* {
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -45,9 +51,11 @@ const propertyDisplay = (() => {
 .backward.line {
   grid-template-columns: 7fr 0;
 }
+
 .backward .property {
   text-align: start;
 }
+
 .backward .item {
   text-align: end;
 }
@@ -57,8 +65,8 @@ const propertyDisplay = (() => {
     grid-template-columns: 5fr 7fr;
     column-gap: 32px;
   }
+
   .line.backward {
     grid-template-columns: 7fr 5fr;
   }
-}
-</style>
+}</style>
