@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Step } from 'types/game';
 import { OptionsQueryData, OptionsBinding } from 'types/wikidata';
 
 const { forward, item } = defineProps<{ forward: boolean, item: string }>();
@@ -42,8 +43,8 @@ const { data: optionsGroups } = await useFetch(buildSparqlRequest(query), {
     <div v-if="optionsGroups !== null && optionsGroups.length === 0">
       {{ $t('nothing') }}
     </div>
-    <OptionsGroup v-for="optionsGroup in optionsGroups" :key="optionsGroup[0].prop.value"
-      @step-advance="step => $emit('step-advance', step)" :data="optionsGroup" :backward="!forward"></OptionsGroup>
+    <OptionsListGroup v-for="optionsGroup in optionsGroups" :key="optionsGroup[0].prop.value"
+      @step-advance="(step: Step) => $emit('step-advance', step)" :data="optionsGroup" :backward="!forward"></OptionsListGroup>
   </div>
 </template>
 

@@ -7,7 +7,7 @@ const locale = useI18n().locale.value;
 
 <template>
   <div class="wrapper">
-    <Game :start-id="start" :end-id="end" :locale="locale" :key="[start, end, locale].join('-')"></Game>
+    <TheGame :start-id="start" :end-id="end" :locale="locale" :key="[start, end, locale].join('-')"></TheGame>
   </div>
 </template>
 

@@ -11,7 +11,7 @@ const footerOption = bodyOptions.pop();
 </script>
 
 <template>
-  <Option @step-advance="step => emit('step-advance', step)" :property="{
+  <OptionsListGroupItem @step-advance="(step: Step) => emit('step-advance', step)" :property="{
     id: headerOption.prop.value.split('/').pop() ?? '',
     url: headerOption.prop.value,
     label: headerOption.label2.value
@@ -19,9 +19,9 @@ const footerOption = bodyOptions.pop();
   id: headerOption.item.value.split('/').pop() ?? '',
   url: headerOption.item.value,
   label: headerOption.label1.value
-}" :backward="backward" position="header"></Option>
-  <Option v-for="bodyOption in bodyOptions" :key="bodyOption.item.value"
-    @step-advance="step => emit('step-advance', step)" :property="{
+}" :backward="backward" position="header"></OptionsListGroupItem>
+  <OptionsListGroupItem v-for="bodyOption in bodyOptions" :key="bodyOption.item.value"
+    @step-advance="(step: Step) => emit('step-advance', step)" :property="{
       id: bodyOption.prop.value.split('/').pop() ?? '',
       url: bodyOption.prop.value,
       label: bodyOption.label2.value
@@ -29,8 +29,8 @@ const footerOption = bodyOptions.pop();
   id: bodyOption.item.value.split('/').pop() ?? '',
   url: bodyOption.item.value,
   label: bodyOption.label1.value
-}" :backward="backward" position="body"></Option>
-  <Option v-if="footerOption" @step-advance="step => $emit('step-advance', step)" :property="{
+}" :backward="backward" position="body"></OptionsListGroupItem>
+  <OptionsListGroupItem v-if="footerOption" @step-advance="(step: Step) => $emit('step-advance', step)" :property="{
     id: footerOption.prop.value.split('/').pop() ?? '',
     url: footerOption.prop.value,
     label: footerOption.label2.value
@@ -38,5 +38,5 @@ const footerOption = bodyOptions.pop();
   id: footerOption.item.value.split('/').pop() ?? '',
   url: footerOption.item.value,
   label: footerOption.label1.value
-}" :backward="backward" position="footer"></Option>
+}" :backward="backward" position="footer"></OptionsListGroupItem>
 </template>

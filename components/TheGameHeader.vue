@@ -4,19 +4,19 @@ const { backward } = defineProps<{ backward: boolean }>();
 
 <template>
   <header>
-    <Home></Home>
-    <Distance
+    <HomeLink></HomeLink>
+    <DistanceWidget
       :target="89"
       :current="25"
-      ></Distance>
-    <Direction
+      ></DistanceWidget>
+    <DirectionButton
       @toggle-backward="() => $emit('toggle-backward')"
       :backward="backward"
       :key="[backward].join('_')"
-      ></Direction>
+      ></DirectionButton>
     <div></div>
-    <Information></Information>
-    <Wikidata></Wikidata>
+    <InformationLink></InformationLink>
+    <WikidataLink></WikidataLink>
   </header>
 </template>
 
