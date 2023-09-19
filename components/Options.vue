@@ -42,8 +42,8 @@ const { data: optionsGroups } = await useFetch(buildSparqlRequest(query), {
     <div v-if="optionsGroups !== null && optionsGroups.length === 0">
       {{ $t('nothing') }}
     </div>
-    <OptionsGroup v-for="optionsGroup in optionsGroups" @step-advance="step => $emit('step-advance', step)"
-      :data="optionsGroup" :backward="!forward"></OptionsGroup>
+    <OptionsGroup v-for="optionsGroup in optionsGroups" :key="optionsGroup[0].prop.value"
+      @step-advance="step => $emit('step-advance', step)" :data="optionsGroup" :backward="!forward"></OptionsGroup>
   </div>
 </template>
 
