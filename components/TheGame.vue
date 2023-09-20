@@ -69,11 +69,12 @@ watch(current, (newCurrentValue, oldCurrentValue) => {
   <EndModal v-if="won" :steps="steps"></EndModal>
   <TheGameHeader @toggle-backward="backward = !backward" :backward="backward"></TheGameHeader>
   <main>
-    <TheGameBreadcrumb v-if="data" @step-back="(i: number) => index = i" :start="data.start" :steps="steps" :end="data.end"
-      :forward="!backward" :key="[current.forward, data.start, ...steps, data.end].join('_')"></TheGameBreadcrumb>
+    <TheGameBreadcrumb v-if="data" @step-back="(i: number) => index = i" :start="data.start" :steps="steps"
+      :end="data.end" :forward="!backward" :position="index" :won="won"
+      :key="[current.forward, data.start, ...steps, data.end].join('_')"></TheGameBreadcrumb>
     <transition name="fade" mode="out-in">
-      <OptionsList @step-advance="(step: Step) => { steps = [...steps.slice(0, index), step]; index++; }" :forward="!backward"
-        :item="current.id" :key="[current.id, !backward].join('_')"></OptionsList>
+      <OptionsList @step-advance="(step: Step) => { steps = [...steps.slice(0, index), step]; index++; }"
+        :forward="!backward" :item="current.id" :key="[current.id, !backward].join('_')"></OptionsList>
     </transition>
   </main>
 </template>

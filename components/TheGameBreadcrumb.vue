@@ -1,17 +1,25 @@
 <script setup lang="ts">
 import { Start, Step } from 'types/game';
 
-const { start, steps, end, forward } = defineProps<{ start: Start, steps: Step[], end: Step, forward: boolean }>();
+const { start, steps, end, forward, position, won } = defineProps<{
+  start: Start,
+  steps: Step[],
+  end: Step,
+  forward: boolean,
+  position: number,
+  won: boolean,
+}>();
 </script>
 
 <template>
   <nav>
     <ol>
-      <li @click="$emit('step-back', 0);">{{ start.label }}</li>
-      <li v-for="step, i of steps" @click="$emit('step-back', i + 1)" :key="[step.id, step.forward, i].join('_')"
-        :class="{ forward: step.forward }">{{ step.label }}</li>
-      <li class="etc" :class="{ forward: forward }">•••</li>
-      <li :class="{ forward: forward }">{{ end.label }}</li>
+      <li @click="$emit('step-back', 0);" :class="{ active: position === 0 }"><span>{{ start.label }}</span></li>
+      <li v-for="step, i of (won ? steps.slice(0, -1) : steps)" @click="$emit('step-back', i + 1)"
+        :key="[step.id, step.forward, i].join('_')" :class="{ forward: step.forward, active: position === i + 1 }">
+        <span>{{ step.label }}</span></li>
+      <li v-if="!won" class="etc" :class="{ forward: forward }">•••</li>
+      <li :class="{ forward: forward, active: won }"><span>{{ end.label }}</span></li>
     </ol>
   </nav>
 </template>
@@ -32,7 +40,8 @@ nav ol li {
   cursor: pointer;
 }
 
-nav ol li:hover {
+nav ol li:hover span,
+nav ol li.active span {
   text-decoration: underline;
 }
 
@@ -59,10 +68,6 @@ nav ol li:not(:first-child)::before {
   content: "<";
   color: var(--light);
   margin: 0 8px;
-}
-
-nav ol li:hover:not(:first-child)::before {
-  text-decoration: none !important;
 }
 
 nav ol li.forward:not(:first-child)::before {
