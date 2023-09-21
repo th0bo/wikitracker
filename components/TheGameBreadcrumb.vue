@@ -51,7 +51,7 @@ li:last-child:hover {
 }
 
 nav ol li.etc {
-  color: var(--light);
+  color: var(--secondary);
   cursor: unset;
 }
 
@@ -66,7 +66,7 @@ nav ol li:last-child {
 
 nav ol li:not(:first-child)::before {
   content: "<";
-  color: var(--light);
+  color: var(--secondary);
   margin: 0 8px;
 }
 
