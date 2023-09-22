@@ -10,26 +10,40 @@ const copy = () => {
 
 <template>
   <dialog open>
-    <p>{{ $t('congrats') }}</p>
-    <p>{{ steps.map(({ label }) => label).join(', ') }}</p>
-    <input type="text" :value="location" disabled="true" :aria-label="$t('sharePath')" />
-    <button :onclick="copy">Copy</button>
+    <div>
+      <p>{{ $t('congrats') }}</p>
+      <p>{{ steps.map(({ label }) => label).join(', ') }}</p>
+      <input type="text" :value="location" disabled="true" :aria-label="$t('sharePath')" />
+      <button :onclick="copy">Copy</button>
+    </div>
   </dialog>
 </template>
 
 <style scoped>
-
 dialog {
+  top: 0;
+  left: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  backdrop-filter: blur(5px);
+  display: grid;
+  place-items: center;
+}
+
+div {
   background-color: var(--background);
   color: var(--text);
-  margin: 10vh 10vw;
-  height: 80vh;
-  width: 80vw;
+  width: min(100vw, 100vh);
+  aspect-ratio: 1/1;
   display: grid;
   grid-template-columns: 9fr 1fr;
 }
 
-dialog > p {
+div>p {
   grid-column: 1 / 3;
 }
 
