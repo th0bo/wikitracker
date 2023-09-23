@@ -1,14 +1,13 @@
 <script setup lang="ts">
+import { Step } from 'types/game';
+
 const { backward } = defineProps<{ backward: boolean }>();
 </script>
 
 <template>
   <header>
     <HomeLink></HomeLink>
-    <DistanceWidget
-      :target="89"
-      :current="25"
-      ></DistanceWidget>
+    <div></div>
     <DirectionButton
       @toggle-backward="() => $emit('toggle-backward')"
       :backward="backward"
