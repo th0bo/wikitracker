@@ -75,7 +75,7 @@ watch(current, () => {
 
 <template>
   <EndModal v-if="won" :steps="steps"></EndModal>
-  <TheGameHeader @toggle-backward="backward = !backward" :backward="backward"></TheGameHeader>
+  <TheGameHeader @toggle-backward="backward = !backward" :backward="backward" :current-url="current.url"></TheGameHeader>
   <main>
     <TheGameBreadcrumb v-if="data" @step-back="(i: number) => index = i" :start="data.start" :steps="steps"
       :end="data.end" :forward="!backward" :position="index" :won="won"

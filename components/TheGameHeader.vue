@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { Step } from 'types/game';
-
-const { backward } = defineProps<{ backward: boolean }>();
+const { backward, currentUrl } = defineProps<{ backward: boolean, currentUrl?: string }>();
 </script>
 
 <template>
@@ -15,7 +13,7 @@ const { backward } = defineProps<{ backward: boolean }>();
       ></DirectionButton>
     <div></div>
     <InformationLink></InformationLink>
-    <WikidataLink></WikidataLink>
+    <WikidataLink :current-url="currentUrl" :key="currentUrl"></WikidataLink>
   </header>
 </template>
 

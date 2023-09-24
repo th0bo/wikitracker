@@ -1,5 +1,10 @@
+<script setup lang="ts">
+const { currentUrl } = defineProps<{ currentUrl?: string }>();
+const url = currentUrl ?? 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
+</script>
+
 <template>
-  <NuxtLink to="https://www.wikidata.org/wiki/Wikidata:Main_Page">
+  <NuxtLink :to="url" target="_blank">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 270">
       <path fill-rule="evenodd"
         d="M 135 0 l 135 135 l -135 135 l -135 -135 z M 135 13.5 l 121.5 121.5 l -121.5 121.5 l -121.5 -121.5 z"
