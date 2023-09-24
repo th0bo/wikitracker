@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Start, Step } from 'types/game';
+import { Step } from 'types/game';
 
 const { start, steps, end, forward, position, won } = defineProps<{
-  start: Start,
+  start: Step,
   steps: Step[],
-  end: Step,
+  end: Omit<Step, 'forward'>,
   forward: boolean,
   position: number,
   won: boolean,

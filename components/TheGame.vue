@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Start, Step } from 'types/game';
+import { Step } from 'types/game';
 import { EndsQueryData } from 'types/wikidata';
 
 const { startId, endId, locale } = defineProps<{ startId: string, endId: string, locale: string }>();
@@ -14,39 +14,47 @@ const query =
 const { data } = await useFetch(buildSparqlRequest(query), {
   transform: (data: EndsQueryData) => {
     let startLabel: string | null = null;
+    let startUrl: string | null = null;
     let endLabel: string | null = null;
+    let endUrl: string | null = null;
     for (const binding of data.results.bindings) {
       if (binding.item.value.endsWith(startId)) {
         startLabel = binding.label.value;
+        startUrl = binding.item.value;
       } else if (binding.item.value.endsWith(endId)) {
         endLabel = binding.label.value;
+        endUrl = binding.item.value;
       }
     }
 
-    if (startLabel === null || endLabel === null) {
+    if ([startLabel, startUrl, endLabel, endUrl].includes(null)) {
       throw new Error();
     }
 
     return {
       start: {
-        label: startLabel as string,
-        url: '',
+        label: startLabel,
+        url: startUrl,
         id: startId,
+        forward: true,
       },
       end: {
-        label: endLabel as string,
-        url: '',
+        label: endLabel,
+        url: endUrl,
         id: endId,
+        forward: true,
       },
-    } as { start: Start, end: Step };
+    } as { start: Step, end: Omit<Step, 'forward'> };
   },
 });
+
+const start = data.value?.start as Step;
 
 const steps = ref([] as Step[]);
 const index = ref(0);
 
-const current = computed<{ id: string, forward: boolean }>(() => {
-  const value = [{ id: startId, forward: true }, ...steps.value][index.value];
+const current = computed<Step>(() => {
+  const value = [start, ...steps.value][index.value];
   return value;
 });
 
@@ -54,7 +62,7 @@ const backward = ref(!current.value.forward);
 
 const won = computed(() => current.value.id === endId);
 
-watch(current, (newCurrentValue, oldCurrentValue) => {
+watch(current, () => {
   const nextStep = steps.value[index.value];
   if (nextStep !== undefined) {
     backward.value = !nextStep.forward;
