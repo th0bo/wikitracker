@@ -3,10 +3,12 @@ definePageMeta({ layout: false });
 
 const { start, end } = useRoute().params as { [key: string]: string };
 const locale = useI18n().locale.value;
+const { dir } = useI18n().localeProperties.value;
+const rtl = dir === 'rtl';
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :class="{ dirRtl: rtl }">
     <TheGame :start-id="start" :end-id="end" :locale="locale" :key="[start, end, locale].join('-')"></TheGame>
   </div>
 </template>
@@ -25,6 +27,10 @@ body {
   row-gap: 1vh;
   grid-template-columns: 1fr;
   grid-template-rows: min-content auto;
+}
+
+.dirRtl {
+  direction: rtl;
 }
 
 @media (orientation: landscape) {

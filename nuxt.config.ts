@@ -44,6 +44,13 @@ export default defineNuxtConfig({
             name: '한국어',
             file: 'ko.json'
           },
+          {
+            code: 'he',
+            iso: 'he',
+            name: 'עִברִית',
+            file: 'he.json',
+            dir: 'rtl',
+          },
         ],
         debug: false,
         defaultLocale: 'en',

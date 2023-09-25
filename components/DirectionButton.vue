@@ -3,9 +3,11 @@ const timeUnit = 800;
 let loading = false;
 
 const { backward } = defineProps<{ backward: boolean }>();
+const { dir } = useI18n().localeProperties.value;
+const rtl = dir === 'rtl';
 
 const zooming = ref(false);
-const direction = ref(backward ? -1 : 1);
+const direction = ref(backward !== rtl ? -1 : 1);
 
 const queryData = () => {
   loading = true;

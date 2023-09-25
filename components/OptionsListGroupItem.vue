@@ -5,14 +5,24 @@ const { property, backward, position } = defineProps<{
   backward: boolean,
   position: 'header' | 'body' | 'footer',
 }>();
+const { dir } = useI18n().localeProperties.value;
+const rtl = dir === 'rtl';
+
 const propertyDisplay = (() => {
-  switch (position) {
-    case 'header':
+  if (position === 'header') {
       return property.label;
-    case 'body':
-      return backward ? '─┤' : '├─';
-    case 'footer':
-      return backward ? '─┘' : '└─';
+  } else {
+    let linkTopDown = null;
+    if (position === 'body') {
+      linkTopDown = backward !== rtl ? '┤' : '├';
+    } else if (position === 'footer') {
+      linkTopDown = backward !== rtl ? '┘' : '└';
+    }
+    if (backward) {
+      return '─' + linkTopDown;
+    } else {
+      return linkTopDown + '─'; 
+    }
   }
 })();
 </script>
