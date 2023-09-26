@@ -95,7 +95,7 @@ main {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s;
+  transition: opacity 800ms;
 }
 
 .fade-enter-from,
