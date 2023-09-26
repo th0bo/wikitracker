@@ -6,11 +6,10 @@ const { backward, currentUrl } = defineProps<{ backward: boolean, currentUrl?: s
   <header>
     <HomeLink></HomeLink>
     <div></div>
-    <DirectionButton
-      @toggle-backward="() => $emit('toggle-backward')"
-      :backward="backward"
-      :key="[backward].join('_')"
-      ></DirectionButton>
+    <Transition>
+      <DirectionButton @toggle-backward="() => $emit('toggle-backward')" :backward="backward" :key="[backward].join('_')">
+      </DirectionButton>
+    </Transition>
     <div></div>
     <InformationLink></InformationLink>
     <WikidataLink :current-url="currentUrl" :key="currentUrl"></WikidataLink>

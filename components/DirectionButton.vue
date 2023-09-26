@@ -38,7 +38,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <button @click="$emit('toggle-backward'); handleClick();" :class="{ unclickable: zooming }">
+  <button @click="$emit('toggle-backward');" :class="{ unclickable: zooming }">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
       <path class="frame" d="M 100 0 l 100 100 l -100 100 l -100 -100 Z M 100 10 l 90 90 l -90 90 l -90 -90 Z"></path>
       <g>
@@ -114,4 +114,25 @@ rect.zooming {
 
 .shrinked {
   d: path("M 120 90 l 10 10 l -10 10");
-}</style>
+}
+
+.v-enter-active .arrow {
+  transition-delay: 200ms;
+  /* transition-timing-function: ease-in; */
+}
+
+.v-enter-active .arrow.shrinked {
+  transition-delay: 0ms;
+  /* transition-timing-function: ease-out; */
+}
+
+.v-enter-from .arrow,
+.v-leave-to .arrow {
+  d: path("M 120 90 l 10 10 l -10 10");
+}
+
+.v-enter-from .arrow.shrinked,
+.v-leave-to .arrow.shrinked {
+  d: path("M 90 60 l 40 40 l -40 40");
+}
+</style>
