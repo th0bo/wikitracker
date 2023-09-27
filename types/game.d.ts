@@ -1,6 +1,6 @@
 export interface Step {
-  label: string;
-  id: string;
-  url: string;
-  forward: boolean;
+  displayLabel: string;
+  itemId: string;
+  wikidataUrl: string;
+  enterBackward: boolean;
 }

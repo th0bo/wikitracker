@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { Step } from 'types/game';
+
 const { property, backward, position } = defineProps<{
   property: { id: string, url: string, label: string },
-  item: { id: string, url: string, label: string },
+  item: Omit<Step, 'enterBackward'>,
   backward: boolean,
   position: 'header' | 'body' | 'footer',
 }>();
@@ -28,10 +30,10 @@ const propertyDisplay = (() => {
 </script>
 
 <template>
-  <div @click="$emit('step-advance', { forward: !backward, ...item });" class="line" :class="{ 'backward': backward }"
+  <div @click="$emit('step-advance', { enterBackward: backward, ...item });" class="line" :class="{ 'backward': backward }"
     tabindex="0">
     <div v-if="!backward" class="property" v-bind:aria-label="property.label">{{ propertyDisplay }}</div>
-    <div class="item">{{ item.label }}</div>
+    <div class="item">{{ item.displayLabel }}</div>
     <div v-if="backward" class="property" v-bind:aria-label="property.label">{{ propertyDisplay }}</div>
   </div>
 </template>

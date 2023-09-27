@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Step } from 'types/game';
 
-const { start, steps, end, forward, position, won } = defineProps<{
+const { start, steps, end, backward, position, won } = defineProps<{
   start: Step,
   steps: Step[],
-  end: Omit<Step, 'forward'>,
-  forward: boolean,
+  end: Omit<Step, 'enterBackward'>,
+  backward: boolean,
   position: number,
   won: boolean,
 }>();
@@ -14,12 +14,12 @@ const { start, steps, end, forward, position, won } = defineProps<{
 <template>
   <nav>
     <ol>
-      <li @click="$emit('step-back', 0);" :class="{ active: position === 0 }"><span>{{ start.label }}</span></li>
+      <li @click="$emit('step-back', 0);" :class="{ active: position === 0 }"><span>{{ start.displayLabel }}</span></li>
       <li v-for="step, i of (won ? steps.slice(0, -1) : steps)" @click="$emit('step-back', i + 1)"
-        :key="[step.id, step.forward, i].join('_')" :class="{ forward: step.forward, active: position === i + 1 }">
-        <span>{{ step.label }}</span></li>
-      <li v-if="!won" class="etc" :class="{ forward: forward }">•••</li>
-      <li :class="{ forward: forward, active: won }"><span>{{ end.label }}</span></li>
+        :key="[step.itemId, !step.enterBackward, i].join('_')" :class="{ backward: step.enterBackward, active: position === i + 1 }">
+        <span>{{ step.displayLabel }}</span></li>
+      <li v-if="!won" class="etc" :class="{ backward }">•••</li>
+      <li :class="{ backward, active: won }"><span>{{ end.displayLabel }}</span></li>
     </ol>
   </nav>
 </template>
@@ -65,12 +65,12 @@ nav ol li:last-child {
 }
 
 nav ol li:not(:first-child)::before {
-  content: "<";
+  content: ">";
   color: var(--secondary);
   margin: 0 8px;
 }
 
-nav ol li.forward:not(:first-child)::before {
-  content: ">";
+nav ol li.backward:not(:first-child)::before {
+  content: "<";
 }
 </style>

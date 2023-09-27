@@ -16,9 +16,9 @@ const footerOption = bodyOptions.pop();
     url: headerOption.prop.value,
     label: headerOption.label2.value
   }" :item="{
-  id: headerOption.item.value.split('/').pop() ?? '',
-  url: headerOption.item.value,
-  label: headerOption.label1.value
+  itemId: headerOption.item.value.split('/').pop() ?? '',
+  wikidataUrl: headerOption.item.value,
+  displayLabel: headerOption.label1.value
 }" :backward="backward" position="header"></OptionsListGroupItem>
   <OptionsListGroupItem v-for="bodyOption in bodyOptions" :key="bodyOption.item.value"
     @step-advance="(step: Step) => emit('step-advance', step)" :property="{
@@ -26,17 +26,17 @@ const footerOption = bodyOptions.pop();
       url: bodyOption.prop.value,
       label: bodyOption.label2.value
     }" :item="{
-  id: bodyOption.item.value.split('/').pop() ?? '',
-  url: bodyOption.item.value,
-  label: bodyOption.label1.value
+  itemId: bodyOption.item.value.split('/').pop() ?? '',
+  wikidataUrl: bodyOption.item.value,
+  displayLabel: bodyOption.label1.value
 }" :backward="backward" position="body"></OptionsListGroupItem>
   <OptionsListGroupItem v-if="footerOption" @step-advance="(step: Step) => $emit('step-advance', step)" :property="{
     id: footerOption.prop.value.split('/').pop() ?? '',
     url: footerOption.prop.value,
     label: footerOption.label2.value
   }" :item="{
-  id: footerOption.item.value.split('/').pop() ?? '',
-  url: footerOption.item.value,
-  label: footerOption.label1.value
+  itemId: footerOption.item.value.split('/').pop() ?? '',
+  wikidataUrl: footerOption.item.value,
+  displayLabel: footerOption.label1.value
 }" :backward="backward" position="footer"></OptionsListGroupItem>
 </template>

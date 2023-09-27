@@ -2,11 +2,11 @@
 import { Step } from 'types/game';
 import { OptionsQueryData, OptionsBinding } from 'types/wikidata';
 
-const { forward, item } = defineProps<{ forward: boolean, item: string }>();
+const { backward, item } = defineProps<{ backward: boolean, item: string }>();
 
 const locale = useI18n().locale.value;
 
-const relation = forward ? `wd:${item} ?prop ?item.` : `?item ?prop wd:${item}.`;
+const relation = backward ? `?item ?prop wd:${item}.` : `wd:${item} ?prop ?item.`;
 const query =
   `SELECT
   ?label1 ?item ?label2 ?prop ?p
@@ -44,7 +44,7 @@ const { data: optionsGroups } = await useFetch(buildSparqlRequest(query), {
       {{ $t('nothing') }}
     </div>
     <OptionsListGroup v-for="optionsGroup in optionsGroups" :key="optionsGroup[0].prop.value"
-      @step-advance="(step: Step) => $emit('step-advance', step)" :data="optionsGroup" :backward="!forward"></OptionsListGroup>
+      @step-advance="(step: Step) => $emit('step-advance', step)" :data="optionsGroup" :backward="backward"></OptionsListGroup>
   </div>
 </template>
 

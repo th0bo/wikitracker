@@ -33,18 +33,17 @@ const { data } = await useFetch(buildSparqlRequest(query), {
 
     return {
       start: {
-        label: startLabel,
-        url: startUrl,
-        id: startId,
-        forward: true,
+        displayLabel: startLabel,
+        wikidataUrl: startUrl,
+        itemId: startId,
+        enterBackward: false,
       },
       end: {
-        label: endLabel,
-        url: endUrl,
-        id: endId,
-        forward: true,
+        displayLabel: endLabel,
+        wikidataUrl: endUrl,
+        itemId: endId,
       },
-    } as { start: Step, end: Omit<Step, 'forward'> };
+    } as { start: Step, end: Omit<Step, 'enterBackward'> };
   },
 });
 
@@ -58,16 +57,16 @@ const current = computed<Step>(() => {
   return value;
 });
 
-const backward = ref(!current.value.forward);
+const backward = ref(current.value.enterBackward);
 
-const won = computed(() => current.value.id === endId);
+const won = computed(() => current.value.itemId === endId);
 
 watch(current, () => {
   const nextStep = steps.value[index.value];
   if (nextStep !== undefined) {
-    backward.value = !nextStep.forward;
+    backward.value = nextStep.enterBackward;
   } else {
-    backward.value = !current.value.forward;
+    backward.value = current.value.enterBackward;
   }
 });
 
@@ -75,14 +74,14 @@ watch(current, () => {
 
 <template>
   <EndModal v-if="won" :steps="steps"></EndModal>
-  <TheGameHeader @toggle-backward="backward = !backward" :backward="backward" :current-url="current.url"></TheGameHeader>
+  <TheGameHeader @toggle-backward="backward = !backward" :backward="backward" :current-url="current.wikidataUrl"></TheGameHeader>
   <main>
     <TheGameBreadcrumb v-if="data" @step-back="(i: number) => index = i" :start="data.start" :steps="steps"
-      :end="data.end" :forward="!backward" :position="index" :won="won"
-      :key="[current.forward, data.start, ...steps, data.end].join('_')"></TheGameBreadcrumb>
+      :end="data.end" :backward="backward" :position="index" :won="won"
+      :key="[!current.enterBackward, data.start, ...steps, data.end].join('_')"></TheGameBreadcrumb>
     <transition name="fade" mode="out-in">
       <OptionsList @step-advance="(step: Step) => { steps = [...steps.slice(0, index), step]; index++; }"
-        :forward="!backward" :item="current.id" :key="[current.id, !backward].join('_')"></OptionsList>
+        :backward="backward" :item="current.itemId" :key="[current.itemId, backward].join('_')"></OptionsList>
     </transition>
   </main>
 </template>
