@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { backward, currentUrl } = defineProps<{ backward: boolean, currentUrl?: string }>();
+const { currentlyBackward, selectedItemUrl } = defineProps<{ currentlyBackward: boolean, selectedItemUrl?: string }>();
 </script>
 
 <template>
@@ -7,12 +7,13 @@ const { backward, currentUrl } = defineProps<{ backward: boolean, currentUrl?: s
     <HomeLink></HomeLink>
     <div></div>
     <Transition>
-      <DirectionButton @toggle-backward="() => $emit('toggle-backward')" :backward="backward" :key="[backward].join('_')">
+      <DirectionButton @toggle-backward="() => $emit('toggle-backward')" :backward="currentlyBackward"
+        :key="[currentlyBackward].join('_')">
       </DirectionButton>
     </Transition>
     <div></div>
     <InformationLink></InformationLink>
-    <WikidataLink :current-url="currentUrl" :key="currentUrl"></WikidataLink>
+    <WikidataLink :item-url="selectedItemUrl" :key="selectedItemUrl"></WikidataLink>
   </header>
 </template>
 

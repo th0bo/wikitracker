@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Step } from 'types/game';
+import { PastStep, Item } from 'types/game';
 
-const { steps } = defineProps<{ steps: Step[] }>();
+const { pastSteps, endItem } = defineProps<{ pastSteps: PastStep[], endItem: Item }>();
 const location = window.location.toString();
 const copy = () => {
   navigator.clipboard.writeText(location);
@@ -12,7 +12,8 @@ const copy = () => {
   <dialog open>
     <div>
       <p>{{ $t('congrats') }}</p>
-      <p>{{ steps.map(({ label }) => label).join(', ') }}</p>
+      <p v-for="pastStep of pastSteps">{{ pastStep.item.label }} {{ pastStep.exitProperty.label }}</p>
+      <p>{{ endItem.label }}</p>
       <input type="text" :value="location" disabled="true" :aria-label="$t('sharePath')" />
       <button :onclick="copy">Copy</button>
     </div>

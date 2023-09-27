@@ -1,25 +1,33 @@
 <script setup lang="ts">
-import { Step } from 'types/game';
+import { Item, PastStep } from 'types/game';
 
-const { start, steps, end, backward, position, won } = defineProps<{
-  start: Step,
-  steps: Step[],
-  end: Omit<Step, 'enterBackward'>,
-  backward: boolean,
-  position: number,
-  won: boolean,
+const { pastSteps, selectedIndex, currentTopItem, endItem, currentlyBackward, gameIsWon } = defineProps<{
+  pastSteps: PastStep[],
+  selectedIndex: number,
+  currentTopItem: Item,
+  endItem: Item,
+  currentlyBackward: boolean,
+  gameIsWon: boolean,
 }>();
+
+const currentTopItemIndex = computed(() => pastSteps.values.length);
 </script>
 
 <template>
   <nav>
     <ol>
-      <li @click="$emit('step-back', 0);" :class="{ active: position === 0 }"><span>{{ start.displayLabel }}</span></li>
-      <li v-for="step, i of (won ? steps.slice(0, -1) : steps)" @click="$emit('step-back', i + 1)"
-        :key="[step.itemId, !step.enterBackward, i].join('_')" :class="{ backward: step.enterBackward, active: position === i + 1 }">
-        <span>{{ step.displayLabel }}</span></li>
-      <li v-if="!won" class="etc" :class="{ backward }">•••</li>
-      <li :class="{ backward, active: won }"><span>{{ end.displayLabel }}</span></li>
+      <li v-for="pastStep, i of pastSteps" @click="$emit('step-back', i)"
+        :key="[pastStep.item.id, pastStep.exitProperty.id, pastStep.exitProperty.backward, i].join('_')"
+        :class="{ backward: pastStep.exitProperty.backward, active: selectedIndex === i }">
+        <span>{{ pastStep.item.label }}</span>
+      </li>
+      <li @click="$emit('step-back', currentTopItemIndex);"
+        :class="{ active: selectedIndex === currentTopItemIndex, backward: currentlyBackward }"><span>{{
+          currentTopItem.label }}</span></li>
+      <template v-if="!gameIsWon">
+        <li class="etc" :class="{ backward: currentlyBackward }">•••</li>
+        <li><span>{{ endItem.label }}</span></li>
+      </template>
     </ol>
   </nav>
 </template>
@@ -64,13 +72,13 @@ nav ol li:last-child {
   cursor: unset;
 }
 
-nav ol li:not(:first-child)::before {
+nav ol li:not(:last-child)::after {
   content: ">";
   color: var(--secondary);
   margin: 0 8px;
 }
 
-nav ol li.backward:not(:first-child)::before {
+nav ol li.backward:not(:last-child)::after {
   content: "<";
 }
 </style>

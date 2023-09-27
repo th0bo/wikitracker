@@ -1,42 +1,22 @@
 <script setup lang="ts">
-import { Step } from 'types/game';
-import { OptionsBinding } from 'types/wikidata';
+import { Property, Item } from 'types/game';
 
-const { data } = defineProps<{ data: OptionsBinding[], backward: boolean }>();
-const emit = defineEmits<(event: 'step-advance', step: Step) => void>();
+const { property, items } = defineProps<{ property: Property, items: Item[] }>();
 
-const bodyOptions = [...data];
-const headerOption = bodyOptions.shift() as OptionsBinding;
-const footerOption = bodyOptions.pop();
+const emit = defineEmits<(event: 'step-advance', payload: { property: Property, item: Item }) => void>();
+
+const bodyItems = [...items];
+const headerItem = bodyItems.shift() as Item;
+const footerItem = bodyItems.pop();
 </script>
 
 <template>
-  <OptionsListGroupItem @step-advance="(step: Step) => emit('step-advance', step)" :property="{
-    id: headerOption.prop.value.split('/').pop() ?? '',
-    url: headerOption.prop.value,
-    label: headerOption.label2.value
-  }" :item="{
-  itemId: headerOption.item.value.split('/').pop() ?? '',
-  wikidataUrl: headerOption.item.value,
-  displayLabel: headerOption.label1.value
-}" :backward="backward" position="header"></OptionsListGroupItem>
-  <OptionsListGroupItem v-for="bodyOption in bodyOptions" :key="bodyOption.item.value"
-    @step-advance="(step: Step) => emit('step-advance', step)" :property="{
-      id: bodyOption.prop.value.split('/').pop() ?? '',
-      url: bodyOption.prop.value,
-      label: bodyOption.label2.value
-    }" :item="{
-  itemId: bodyOption.item.value.split('/').pop() ?? '',
-  wikidataUrl: bodyOption.item.value,
-  displayLabel: bodyOption.label1.value
-}" :backward="backward" position="body"></OptionsListGroupItem>
-  <OptionsListGroupItem v-if="footerOption" @step-advance="(step: Step) => $emit('step-advance', step)" :property="{
-    id: footerOption.prop.value.split('/').pop() ?? '',
-    url: footerOption.prop.value,
-    label: footerOption.label2.value
-  }" :item="{
-  itemId: footerOption.item.value.split('/').pop() ?? '',
-  wikidataUrl: footerOption.item.value,
-  displayLabel: footerOption.label1.value
-}" :backward="backward" position="footer"></OptionsListGroupItem>
+  <OptionsListGroupItem @step-advance="payload => emit('step-advance', payload)" :property="property" :item="headerItem"
+    position="header"></OptionsListGroupItem>
+  <OptionsListGroupItem v-for="item in bodyItems" @step-advance="payload => emit('step-advance', payload)" :key="item.id"
+    :property="property" :item="item" position="body">
+  </OptionsListGroupItem>
+  <OptionsListGroupItem v-if="footerItem" @step-advance="payload => emit('step-advance', payload)" :property="property"
+    :item="footerItem" position="footer">
+  </OptionsListGroupItem>
 </template>

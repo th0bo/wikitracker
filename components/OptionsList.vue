@@ -1,12 +1,17 @@
 <script setup lang="ts">
-import { Step } from 'types/game';
+import { Item, Property } from 'types/game';
 import { OptionsQueryData, OptionsBinding } from 'types/wikidata';
 
-const { backward, item } = defineProps<{ backward: boolean, item: string }>();
+interface ItemsGroup {
+  property: Property;
+  items: Item[];
+}
+
+const { currentlyBackward, selectedItem } = defineProps<{ currentlyBackward: boolean, selectedItem: Item }>();
 
 const locale = useI18n().locale.value;
 
-const relation = backward ? `?item ?prop wd:${item}.` : `wd:${item} ?prop ?item.`;
+const relation = currentlyBackward ? `?item ?prop wd:${selectedItem.id}.` : `wd:${selectedItem.id} ?prop ?item.`;
 const query =
   `SELECT
   ?label1 ?item ?label2 ?prop ?p
@@ -19,32 +24,50 @@ WHERE {
   FILTER(LANG(?label2) = "${locale}").
 }`;
 
-const { data: optionsGroups } = await useFetch(buildSparqlRequest(query), {
-  transform: (data: OptionsQueryData) => {
-    const bindings = data.results.bindings;
+function mapExternalData({ prop, item, label1, label2 }: OptionsBinding): { property: Property, item: Item } {
+  const propId = prop.value.split('/').pop() ?? '';
+  const itemId = item.value.split('/').pop() ?? '';
+  return {
+    property: {
+      id: propId,
+      url: prop.value,
+      label: label2.value,
+      backward: currentlyBackward,
+    },
+    item: {
+      id: itemId,
+      url: item.value,
+      label: label1.value,
+    },
+  }
+}
 
-    const propertyIdToOptionsGroup = new Map<string, OptionsBinding[]>();
-    for (const binding of bindings) {
-      const propId = binding.prop.value;
-      (propertyIdToOptionsGroup.has(propId) ? (propertyIdToOptionsGroup.get(propId) as OptionsBinding[]) : (() => {
-        const newGroup: OptionsBinding[] = [];
-        propertyIdToOptionsGroup.set(propId, newGroup);
-        return newGroup;
-      })()).push(binding);
+const { data: itemsGroups } = await useFetch(buildSparqlRequest(query), {
+  transform: (data: OptionsQueryData) => {
+    const mappedData = data.results.bindings.map(mapExternalData);
+    const propertyIdToItemsGroup = new Map<string, ItemsGroup>();
+
+    for (const { property, item } of mappedData) {
+      (propertyIdToItemsGroup.has(property.id) ? (propertyIdToItemsGroup.get(property.id) as ItemsGroup) : (() => {
+        const newItemsGroup = { property, items: [] };
+        propertyIdToItemsGroup.set(property.id, newItemsGroup);
+        return newItemsGroup;
+      })()).items.push(item);
     }
-    const optionsGroups = [...propertyIdToOptionsGroup.values()];
-    return optionsGroups;
+    const itemsGroups = [...propertyIdToItemsGroup.values()];
+    return itemsGroups;
   }
 });
 </script>
 
 <template>
   <div>
-    <div v-if="optionsGroups !== null && optionsGroups.length === 0">
+    <div v-if="itemsGroups !== null && itemsGroups.length === 0">
       {{ $t('nothing') }}
     </div>
-    <OptionsListGroup v-for="optionsGroup in optionsGroups" :key="optionsGroup[0].prop.value"
-      @step-advance="(step: Step) => $emit('step-advance', step)" :data="optionsGroup" :backward="backward"></OptionsListGroup>
+    <OptionsListGroup v-for="itemsGroup in itemsGroups" :key="itemsGroup.property.id"
+      @step-advance="payload => $emit('step-advance', payload)" :property="itemsGroup.property" :items="itemsGroup.items">
+    </OptionsListGroup>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const { currentUrl } = defineProps<{ currentUrl?: string }>();
-const url = currentUrl ?? 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
+const { itemUrl } = defineProps<{ itemUrl?: string }>();
+const url = itemUrl ?? 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
 </script>
 
 <template>
