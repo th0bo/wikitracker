@@ -104,7 +104,7 @@ rect.zooming {
   stroke: var(--green);
   stroke-linecap: square;
   fill: none;
-  transition: d 800ms;
+  transition: d 300ms;
   d: path("M 90 60 l 40 40 l -40 40");
 }
 
@@ -117,7 +117,7 @@ rect.zooming {
 }
 
 .v-enter-active .arrow {
-  transition-delay: 200ms;
+  transition-delay: 100ms;
   /* transition-timing-function: ease-in; */
 }
 
