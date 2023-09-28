@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { Item, Property } from 'types/game';
-import { OptionsQueryData, OptionsBinding } from 'types/wikidata';
+import { QueryData, ResultCell, ResultLabel } from 'types/wikidata';
+
+interface OptionsBinding {
+  prop: ResultCell;
+  currentItem: ResultCell;
+  p: ResultCell;
+  currentItemLabel: ResultLabel;
+  propLabel: ResultLabel;
+}
+type OptionsQueryData = QueryData<OptionsBinding>;
 
 interface ItemsGroup {
   property: Property;
@@ -11,33 +20,32 @@ const { currentlyBackward, selectedItem } = defineProps<{ currentlyBackward: boo
 
 const locale = useI18n().locale.value;
 
-const relation = currentlyBackward ? `?item ?prop wd:${selectedItem.id}.` : `wd:${selectedItem.id} ?prop ?item.`;
+const relation = currentlyBackward ? `?currentItem ?prop wd:${selectedItem.id}.` : `wd:${selectedItem.id} ?prop ?currentItem.`;
 const query =
-  `SELECT
-  ?label1 ?item ?label2 ?prop ?p
+`SELECT ?prop ?currentItem ?propLabel ?currentItemLabel ?p
 WHERE {
   ${relation}
-  ?item rdfs:label ?label1.
+  ?currentItem rdfs:label ?currentItemLabel.
   ?p wikibase:directClaim ?prop.
-  ?p rdfs:label ?label2.
-  FILTER(LANG(?label1) = "${locale}").
-  FILTER(LANG(?label2) = "${locale}").
+  ?p rdfs:label ?propLabel.
+  FILTER(LANG(?currentItemLabel) = "${locale}").
+  FILTER(LANG(?propLabel) = "${locale}").
 }`;
 
-function mapExternalData({ prop, item, label1, label2 }: OptionsBinding): { property: Property, item: Item } {
+function mapExternalData({ prop, currentItem, propLabel, currentItemLabel }: OptionsBinding): { property: Property, item: Item } {
   const propId = prop.value.split('/').pop() ?? '';
-  const itemId = item.value.split('/').pop() ?? '';
+  const itemId = currentItem.value.split('/').pop() ?? '';
   return {
     property: {
       id: propId,
       url: prop.value,
-      label: label2.value,
+      label: propLabel.value,
       backward: currentlyBackward,
     },
     item: {
       id: itemId,
-      url: item.value,
-      label: label1.value,
+      url: currentItem.value,
+      label: currentItemLabel.value,
     },
   }
 }

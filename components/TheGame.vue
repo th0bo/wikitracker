@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { Item, Property, PastStep } from 'types/game';
-import { EndsQueryData } from 'types/wikidata';
+import { QueryData, ResultCell, ResultLabel } from 'types/wikidata';
+
+interface EndsBinding {
+  startItemLabel: ResultLabel;
+  startItem: ResultCell;
+  endItemLabel: ResultLabel;
+  endItem: ResultCell;
+}
+type EndsQueryData = QueryData<EndsBinding>;
 
 const { startId, endId, locale } = defineProps<{ startId: string, endId: string, locale: string }>();
 
