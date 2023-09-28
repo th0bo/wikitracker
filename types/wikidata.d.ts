@@ -33,11 +33,10 @@ export interface OptionsBinding {
 export type OptionsQueryData = QueryData<OptionsBinding>;
 
 export interface EndsBinding {
-  item: {
-    type: "uri",
-    value: string
-  }
-  label: Label1;
+  startItemLabel: Label1;
+  startItem: Prop;
+  endItemLabel: Label1;
+  endItem: Prop;
 }
 
 export type EndsQueryData = QueryData<EndsBinding>;
