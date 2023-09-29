@@ -12,7 +12,9 @@ const copy = () => {
   <dialog open>
     <div>
       <p>{{ $t('congrats') }}</p>
-      <p v-for="pastStep, i of pastSteps">{{ pastStep.item.label }} {{ pastStep.exitProperty.label }} {{ (pastSteps[i + 1])?.item.label ?? endItem.label }}</p>
+      <p v-for="pastStep, i of pastSteps">{{ pastStep.exitProperty.backward ? `${(pastSteps[i + 1])?.item.label ??
+        endItem.label} ${pastStep.exitProperty.label} ${pastStep.item.label}` : `${pastStep.item.label}
+              ${pastStep.exitProperty.label} ${(pastSteps[i + 1])?.item.label ?? endItem.label}` }}</p>
       <input type="text" :value="location" disabled="true" :aria-label="$t('sharePath')" />
       <button :onclick="copy">Copy</button>
     </div>
