@@ -73,12 +73,12 @@ nav ol li:last-child {
 }
 
 nav ol li:not(:last-child)::after {
-  content: ">";
+  content: "→";
   color: var(--secondary);
   margin: 0 8px;
 }
 
 nav ol li.backward:not(:last-child)::after {
-  content: "<";
+  content: "←";
 }
 </style>
