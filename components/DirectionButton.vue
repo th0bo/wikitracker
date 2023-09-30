@@ -116,23 +116,23 @@ rect.zooming {
   d: path("M 120 90 l 10 10 l -10 10");
 }
 
-.v-enter-active .arrow {
+.turn-enter-active .arrow {
   transition-delay: 100ms;
   /* transition-timing-function: ease-in; */
 }
 
-.v-enter-active .arrow.shrinked {
+.turn-enter-active .arrow.shrinked {
   transition-delay: 0ms;
   /* transition-timing-function: ease-out; */
 }
 
-.v-enter-from .arrow,
-.v-leave-to .arrow {
+.turn-enter-from .arrow,
+.turn-leave-to .arrow {
   d: path("M 120 90 l 10 10 l -10 10");
 }
 
-.v-enter-from .arrow.shrinked,
-.v-leave-to .arrow.shrinked {
+.turn-enter-from .arrow.shrinked,
+.turn-leave-to .arrow.shrinked {
   d: path("M 90 60 l 40 40 l -40 40");
 }
 </style>

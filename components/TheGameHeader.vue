@@ -6,7 +6,7 @@ const { currentlyBackward, selectedItemUrl } = defineProps<{ currentlyBackward: 
   <header>
     <HomeLink></HomeLink>
     <div></div>
-    <Transition>
+    <Transition mode="out-in" name="turn">
       <DirectionButton @toggle-backward="() => $emit('toggle-backward')" :backward="currentlyBackward"
         :key="[currentlyBackward].join('_')">
       </DirectionButton>
