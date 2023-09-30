@@ -84,7 +84,7 @@ const stepAdvanceHandler = ({ exitProperty, newTopItem }: { exitProperty: Proper
 <template>
   <EndModal v-if="gameIsWon" :past-steps="pastSteps" :end-item="endItem"></EndModal>
   <TheGameHeader @toggle-backward="currentlyBackward = !currentlyBackward" :currently-backward="currentlyBackward"
-    :current-item-url="selectedItem.url">
+    :selected-item-url="selectedItem.url">
   </TheGameHeader>
   <main>
     <TheGameBreadcrumb v-if="data" @step-back="(i: number) => selectedIndex = i" :past-steps="pastSteps"
