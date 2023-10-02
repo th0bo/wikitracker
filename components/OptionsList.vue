@@ -52,7 +52,7 @@ function mapExternalData({ prop, currentItem, propLabel, currentItemLabel }: Opt
 
 const partial = ref(false);
 
-const { data: itemsGroups } = await useFetch(buildSparqlRequest(query), {
+const { data: itemsGroups, pending } = useFetch(buildSparqlRequest(query), {
   transform: (data: OptionsQueryData) => {
     partial.value = isPartial(data);
     const mappedData = data.results.bindings.map(mapExternalData);
@@ -79,7 +79,8 @@ const { data: itemsGroups } = await useFetch(buildSparqlRequest(query), {
     <div v-if="partial">
       All items could not be loaded
     </div>
-    <OptionsListGroup v-for="itemsGroup in itemsGroups" :key="itemsGroup.property.id"
+    <DiamondSpinner v-if="pending"></DiamondSpinner>
+    <OptionsListGroup v-else v-for="itemsGroup in itemsGroups" :key="itemsGroup.property.id"
       @step-advance="payload => $emit('step-advance', payload)" :property="itemsGroup.property" :items="itemsGroup.items">
     </OptionsListGroup>
   </div>
@@ -89,4 +90,5 @@ const { data: itemsGroups } = await useFetch(buildSparqlRequest(query), {
 div {
   overflow-y: auto;
 }
+
 </style>
