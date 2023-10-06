@@ -1,6 +1,8 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-    <path stroke-width="10"></path>
+    <g>
+      <path stroke-width="10"></path>
+    </g>
   </svg>
 </template>
 
@@ -12,31 +14,28 @@ svg {
 
 @keyframes spin {
   0% {
-    d: path("M 99 1 l 1 -1 l 1 1");
-  }
-  12.5% {
-    d: path("M 99 1 l 1 -1 l 100 100");
+    d: path("M 100 10 l 1 1");
   }
   25% {
-    d: path("M 99 1 l 1 -1 l 100 100 l -100 100")
+    d: path("M 100 10 l 90 90");
   }
-  37.5% {
-    d: path("M 99 1 l 1 -1 l 100 100 l -100 100 l -100 -100")
+  26% {
+    d: path("M 100 10 l 90 90 l -1 1");
   }
   50% {
-    d: path("M 99 1 l 1 -1 l 100 100 l -100 100 l -100 -100 Z")
+    d: path("M 100 10 l 90 90 l -90 90")
   }
-  62.5% {
-    d: path("M 199 99 l 1 1 l -100 100 l -100 -100 l 100 -100")
+  51% {
+    d: path("M 100 10 l 90 90 l -90 90 l -1 -1")
   }
   75% {
-    d: path("M 100 200 l -100 -100 l 100 -100")
+    d: path("M 100 10 l 90 90 l -90 90 l -90 -90")
   }
-  87.5% {
-    d: path("M 0 100 l 100 -100")
+  76% {
+    d: path("M 100 10 l 90 90 l -90 90 l -90 -90 l 1 -1")
   }
   100% {
-    d: path("M 100 0 l 1 1")
+    d: path("M 100 10 l 90 90 l -90 90 l -90 -90 l 90 -90")
   }
 }
 
@@ -44,6 +43,26 @@ path {
   stroke: var(--blue);
   fill: none;
   stroke-linecap: square;
-  animation: 4s infinite spin;
+  animation: 1.2s linear infinite alternate spin;
+}
+
+@keyframes back {
+  0% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+  50.1% {
+    transform: scaleX(-1);
+  }
+  100% {
+    transform: scaleX(-1);
+  }
+}
+
+g {
+  transform-origin: center;
+  animation: 2.4s infinite back;
 }
 </style>

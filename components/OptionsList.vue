@@ -79,7 +79,7 @@ const { data: itemsGroups, pending } = useFetch(buildSparqlRequest(query), {
     <div v-if="partial">
       All items could not be loaded
     </div>
-    <DiamondSpinner v-if="pending"></DiamondSpinner>
+    <DiamondSpinner v-if="pending" style="width: 100px;"></DiamondSpinner>
     <OptionsListGroup v-else v-for="itemsGroup in itemsGroups" :key="itemsGroup.property.id"
       @step-advance="payload => $emit('step-advance', payload)" :property="itemsGroup.property" :items="itemsGroup.items">
     </OptionsListGroup>
