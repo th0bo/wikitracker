@@ -22,10 +22,10 @@ const query =
   FILTER(LANG(?endItemLabel) = "${locale}")
 }`;
 
-const { data } = await useFetch(buildSparqlRequest(query), {
+const { data, error } = await useFetch(buildSparqlRequest(query), {
   transform: (data: EndsQueryData) => {
     if (data.results.bindings.length === 0) {
-      throw new Error('Ends');
+      throw new Error();
     }
     const { startItem, startItemLabel, endItem, endItemLabel } = data.results.bindings[0];
     return {
@@ -42,6 +42,10 @@ const { data } = await useFetch(buildSparqlRequest(query), {
     } as { startItem: Item, endItem: Item };
   },
 });
+
+if (error.value !== null) {
+  throw createError({ statusCode: 404, fatal: true });
+}
 
 const startItem = data.value?.startItem as Item;
 const endItem = data.value?.endItem as Item;
