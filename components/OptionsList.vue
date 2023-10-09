@@ -20,11 +20,15 @@ const { currentlyBackward, selectedItem } = defineProps<{ currentlyBackward: boo
 
 const locale = useI18n().locale.value;
 
+const excludedProperties = ['P301', 'P910', 'P1424', 'P5008'];
+const exclusionClause = excludedProperties.map(p => 'wdt:' + p).join(', ')
+
 const relation = currentlyBackward ? `?currentItem ?prop wd:${selectedItem.id}.` : `wd:${selectedItem.id} ?prop ?currentItem.`;
 const query =
 `SELECT ?prop ?currentItem ?propLabel ?currentItemLabel ?p
 WHERE {
   ${relation}
+  FILTER( ?prop NOT IN(${exclusionClause}) ).
   ?currentItem rdfs:label ?currentItemLabel.
   ?p wikibase:directClaim ?prop.
   ?p rdfs:label ?propLabel.
