@@ -1,4 +1,6 @@
 import fetch from "node-fetch";
+import { Headers } from "node-fetch";
+import * as process from "process";
 import * as fs from "fs";
 
 const sparqlQuery = `SELECT ?startItem WHERE {
@@ -25,4 +27,22 @@ fetch(url)
     }
     fs.writeFileSync(dir + "/excluded-properties.json", fileContent);
     console.log(data.results.bindings);
+  });
+
+const deeplAuthKey = process.env.DEEPL_AUTH_KEY;
+
+fetch("https://api-free.deepl.com/v2/translate", {
+  method: "POST",
+  headers: new Headers({
+    Authorization: `DeepL-Auth-Key ${deeplAuthKey}`,
+    "Content-Type": "application/json",
+  }),
+  body: JSON.stringify({
+    text: ["Hello, world!", "Yes"],
+    target_lang: "de",
+  }),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
   });
