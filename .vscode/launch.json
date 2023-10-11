@@ -1,0 +1,31 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Pregenerate",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "DEEPL_AUTH_KEY='' npm run pregenerate"
+    },
+    {
+      "name": "Launch",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev"
+    },
+    {
+      "name": "Open Game",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000/en/game/Q1-Q2"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Launch & Open Game",
+      "configurations": ["Launch", "Open Game"]
+    }
+  ]
+}
