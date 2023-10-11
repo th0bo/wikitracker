@@ -24,3 +24,7 @@ logs
 !.env.example
 
 assets/json/
+
+locales/es.json
+locales/ja.json
+locales/ko.json
