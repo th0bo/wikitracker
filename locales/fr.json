@@ -1,7 +1,4 @@
 {
-  "layouts": {
-    "title": "Page - {title}"
-  },
   "pages": {
     "title": {
       "top": "Top",
@@ -11,9 +8,7 @@
   "about": "Page à propos de",
   "index": "Page d'index",
   "welcome": "Bienvenue",
-  "hello": "Bonjour {name} !",
   "congrats": "Félicitations !",
   "sharePath": "URL de la partie",
-  "nothing": "Rien à voir ici",
-  "items": []
+  "nothing": "Rien à voir ici"
 }
