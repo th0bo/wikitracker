@@ -1,0 +1,9 @@
+{
+  "pages": { "title": { "about": "sobre este sitio web", "top": "Top" } },
+  "about": "Acerca de la página",
+  "index": "Índice",
+  "welcome": "Bienvenido",
+  "congrats": "Enhorabuena.",
+  "sharePath": "URL del juego",
+  "nothing": "Nada que ver aquí"
+}

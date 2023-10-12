@@ -1,0 +1,9 @@
+{
+  "pages": { "title": { "top": "トップ", "about": "このサイトについて" } },
+  "about": "ページについて",
+  "index": "インデックスページ",
+  "welcome": "ようこそ",
+  "congrats": "おめでとう！",
+  "sharePath": "試合URL",
+  "nothing": "ここには何もない"
+}

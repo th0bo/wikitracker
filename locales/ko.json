@@ -1,0 +1,9 @@
+{
+  "pages": { "title": { "top": "Top", "about": "이 웹사이트 정보" } },
+  "about": "정보 페이지",
+  "index": "색인 페이지",
+  "welcome": "환영",
+  "congrats": "축하합니다!",
+  "sharePath": "게임 URL",
+  "nothing": "여기에는 볼 것이 없습니다."
+}
