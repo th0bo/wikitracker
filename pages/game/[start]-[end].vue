@@ -1,5 +1,4 @@
 <script setup lang="ts">
-definePageMeta({ layout: false });
 
 const { start, end } = useRoute().params as { [key: string]: string };
 const locale = useI18n().locale.value;
