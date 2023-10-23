@@ -11,12 +11,6 @@
   --secondary: var(--darkgrey);
 }
 
-html {
-  font-family: sans-serif;
-  background-color: var(--light);
-  color: var(--dark);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --red: rgb(220, 0, 0);
@@ -28,6 +22,7 @@ html {
 }
 
 html {
+  font-family: sans-serif;
   background-color: var(--background);
   color: var(--text);
 }
