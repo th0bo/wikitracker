@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   app: {
     baseURL: process.env.NODE_ENV === 'production' ? '/wikitracker/' : '',
   },
+  typescript: {
+    strict: true
+  },
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   modules: [
