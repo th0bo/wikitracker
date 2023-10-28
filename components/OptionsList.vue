@@ -26,7 +26,7 @@ const exclusionClause = excludedProperties.map(p => 'wdt:' + p).join(', ');
 
 const relation = currentlyBackward ? `?currentItem ?prop wd:${selectedItem.id}.` : `wd:${selectedItem.id} ?prop ?currentItem.`;
 const query =
-`SELECT ?prop ?currentItem ?propLabel ?currentItemLabel ?p
+  `SELECT ?prop ?currentItem ?propLabel ?currentItemLabel ?p
 WHERE {
   ${relation}
   FILTER( ?prop NOT IN(${exclusionClause}) ).
@@ -77,16 +77,17 @@ const { data: itemsGroups, pending } = useFetch(buildSparqlRequest(query), {
 </script>
 
 <template>
-  <div>
+  <div :class="{ content: pending }">
     <div v-if="itemsGroups !== null && itemsGroups.length === 0">
       {{ $t('nothing') }}
     </div>
     <div v-if="partial">
       All items could not be loaded
     </div>
-    <DiamondSpinner v-if="pending" style="width: 100px;"></DiamondSpinner>
+    <DiamondSpinner id="spinner" v-if="pending"></DiamondSpinner>
     <OptionsListGroup v-else v-for="itemsGroup in itemsGroups" :key="itemsGroup.property.id"
-      @step-advance="payload => $emit('step-advance', payload)" :property="itemsGroup.property" :items="itemsGroup.items">
+      @step-advance="payload => $emit('step-advance', payload)" :property="itemsGroup.property"
+      :items="itemsGroup.items">
     </OptionsListGroup>
   </div>
 </template>
@@ -96,4 +97,14 @@ div {
   overflow-y: auto;
 }
 
+.content {
+  display: flex;
+  justify-content: center;
+  /* Horizontal centering */
+  align-items: center;
+}
+
+#spinner {
+  width: min(35vh, 35vw);
+}
 </style>
