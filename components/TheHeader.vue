@@ -11,11 +11,6 @@ header {
   column-gap: inherit;
 }
 
-header>* {
-  display: inline-block;
-  width: fit-content;
-}
-
 @media (orientation: landscape) {
   header {
     grid-template-columns: 1fr;
@@ -23,5 +18,12 @@ header>* {
     column-gap: unset;
     row-gap: inherit;
   }
+}
+</style>
+
+<style>
+header > * {
+  display: inline-block;
+  width: fit-content;
 }
 </style>
