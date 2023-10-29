@@ -35,7 +35,6 @@ const currentTopItemIndex = computed(() => pastSteps.values.length);
 <style scoped>
 nav {
   font-size: 28px;
-  padding-bottom: 14px;
 }
 
 nav ol {

@@ -77,7 +77,9 @@ const { data: itemsGroups, pending } = useFetch(buildSparqlRequest(query), {
 </script>
 
 <template>
-  <div :class="{ content: pending }">
+  <div id="outer-container" :class="{ loading: pending }">
+    <div class="fade-buffer">
+    </div>
     <div v-if="itemsGroups !== null && itemsGroups.length === 0">
       {{ $t('nothing') }}
     </div>
@@ -93,18 +95,28 @@ const { data: itemsGroups, pending } = useFetch(buildSparqlRequest(query), {
 </template>
 
 <style scoped>
+#outer-container {
+  position: relative;
+}
+
 div {
   overflow-y: auto;
 }
 
-.content {
+.loading {
   display: flex;
   justify-content: center;
-  /* Horizontal centering */
   align-items: center;
 }
 
 #spinner {
   width: min(35vh, 35vw);
+}
+
+.fade-buffer {
+  height: 14px;
+  position: sticky;
+  top: 0;
+  background: linear-gradient(to top, transparent, var(--background));
 }
 </style>
