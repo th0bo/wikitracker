@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Item, Property, PastStep } from 'types/game';
-import { QueryData, ResultCell, ResultLabel } from 'types/wikidata';
+import { Item, Property, PastStep } from '../types/game';
+import { QueryData, ResultCell, ResultLabel } from '../types/wikidata';
 
 interface EndsBinding {
   startItemLabel: ResultLabel;

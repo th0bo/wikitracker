@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Item, Property } from 'types/game';
-import { QueryData, ResultCell, ResultLabel } from 'types/wikidata';
+import { Item, Property } from '../types/game';
+import { QueryData, ResultCell, ResultLabel } from '../types/wikidata';
 
 import excludedProperties from '~/assets/json/excluded-properties.json';
 

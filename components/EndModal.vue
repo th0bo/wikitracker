@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PastStep, Item } from 'types/game';
+import { PastStep, Item } from '../types/game';
 
 const { pastSteps, endItem } = defineProps<{ pastSteps: PastStep[], endItem: Item }>();
 const location = window.location.toString();
