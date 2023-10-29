@@ -1,6 +1,6 @@
 export interface PastStep {
-  item: Item
-  exitProperty: Property
+  item: Item;
+  exitProperty: Property;
 }
 
 export interface Item {

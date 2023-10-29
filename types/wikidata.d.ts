@@ -17,5 +17,5 @@ export interface ResultCell {
 }
 
 export interface ResultLabel extends ResultCell {
-  'xml:lang': string;
+  "xml:lang": string;
 }
