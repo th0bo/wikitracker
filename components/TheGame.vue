@@ -11,9 +11,10 @@ interface EndsBinding {
 type EndsQueryData = QueryData<EndsBinding>;
 
 const { startId, endId, locale } = defineProps<{ startId: string, endId: string, locale: string }>();
+const { t } = useI18n();
 
 const query =
-`SELECT ?startItem ?startItemLabel ?endItem ?endItemLabel WHERE {
+  `SELECT ?startItem ?startItemLabel ?endItem ?endItemLabel WHERE {
   VALUES ?startItem { wd:${startId} }
   ?startItem rdfs:label ?startItemLabel.
   VALUES ?endItem { wd:${endId} }
@@ -83,11 +84,19 @@ const stepAdvanceHandler = ({ exitProperty, newTopItem }: { exitProperty: Proper
   selectedIndex.value++;
 }
 
+onBeforeRouteLeave((to, from, next) => {
+  if (pastSteps.value.length > 0 && !confirm(t("quitGuard"))) {
+    next(false);
+  } else {
+    next();
+  }
+});
+
 </script>
 
 <template>
   <EndModal v-if="gameIsWon" :past-steps="pastSteps" :end-item="endItem"></EndModal>
-  <TheHeader> 
+  <TheHeader>
     <HomeLink></HomeLink>
     <div></div>
     <Transition mode="out-in" name="turn">

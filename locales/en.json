@@ -10,5 +10,6 @@
   "welcome": "Welcome",
   "congrats": "Congratulations !",
   "sharePath": "URL of the game",
-  "nothing": "Nothing to see here"
+  "nothing": "Nothing to see here",
+  "quitGuard": "You have a game in progress. Are you sure you want to leave ?"
 }

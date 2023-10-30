@@ -1,10 +1,6 @@
 {
-  "pages": {
-    "title": {
-      "top": "Top",
-      "about": "à propos de ce site"
-    }
-  },
+  "quitGuard": "Une partie est en cours. Êtes-vous sûr de vouloir partir ?",
+  "pages": { "title": { "top": "Top", "about": "à propos de ce site" } },
   "about": "Page à propos de",
   "index": "Page d'index",
   "welcome": "Bienvenue",
