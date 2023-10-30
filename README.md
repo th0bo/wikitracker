@@ -1,10 +1,16 @@
 [![Deploy Nuxt site to Pages](https://github.com/th0bo/wikitracker/actions/workflows/nuxtjs.yml/badge.svg)](https://github.com/th0bo/wikitracker/actions/workflows/nuxtjs.yml)
 
-# Nuxt 3 Minimal Starter
+# WikiTracker
+
+## Overview
+
+[Play here](https://th0bo.github.io/wikitracker/game/Q161904-Q41269)
+
+## Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
+### Setup
 
 Make sure to install the dependencies:
 
@@ -19,7 +25,7 @@ pnpm install
 yarn install
 ```
 
-## Development Server
+### Development Server
 
 Start the development server on `http://localhost:3000`:
 
@@ -34,7 +40,7 @@ pnpm run dev
 yarn dev
 ```
 
-## Production
+### Production
 
 Build the application for production:
 
