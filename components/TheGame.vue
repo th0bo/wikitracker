@@ -95,7 +95,7 @@ onBeforeRouteLeave((to, from, next) => {
 </script>
 
 <template>
-  <EndModal v-if="gameIsWon" :past-steps="pastSteps" :end-item="endItem"></EndModal>
+  <!-- <EndModal v-if="gameIsWon" :past-steps="pastSteps" :end-item="endItem"></EndModal> -->
   <TheHeader>
     <HomeLink></HomeLink>
     <div></div>
@@ -115,7 +115,8 @@ onBeforeRouteLeave((to, from, next) => {
       :key="[pastStepsKey, selectedIndex, currentTopItem.id, endItem.id, currentlyBackward, gameIsWon].join('_')">
     </TheGameBreadcrumb>
     <transition name="fade" mode="out-in">
-      <OptionsList @step-advance="stepAdvanceHandler" :currently-backward="currentlyBackward"
+      <EndScreen v-if="gameIsWon" :past-steps="pastSteps" :end-item="endItem"></EndScreen>
+      <OptionsList v-else @step-advance="stepAdvanceHandler" :currently-backward="currentlyBackward"
         :selected-item="selectedItem" :key="[selectedItem.id, currentlyBackward].join('_')"></OptionsList>
     </transition>
   </main>
