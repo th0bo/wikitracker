@@ -53,8 +53,8 @@ nav ol li.active span {
   text-decoration: underline;
 }
 
-.etc:hover,
-li:last-child:hover {
+nav ol li.etc:hover span,
+nav ol li:last-child:hover span {
   text-decoration: unset;
 }
 
