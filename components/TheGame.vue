@@ -13,6 +13,9 @@ type EndsQueryData = QueryData<EndsBinding>;
 const { startId, endId, locale } = defineProps<{ startId: string, endId: string, locale: string }>();
 const { t } = useI18n();
 
+/**
+ * This query fetches data for start and end items.
+ */
 const query =
   `SELECT ?startItem ?startItemLabel ?endItem ?endItemLabel WHERE {
   VALUES ?startItem { wd:${startId} }
@@ -50,18 +53,39 @@ if (error.value !== null) {
 
 const startItem = data.value?.startItem as Item;
 const endItem = data.value?.endItem as Item;
+/**
+ * True if the items currently shown are those with links
+ * to the current item, false if they are those that the 
+ * current item links to.
+ */
 const currentlyBackward = ref(false);
 
+/**
+ * The item on top of the steps chain. It is not yet a past step as 
+ * we don't currently know the property that will be used to leave it.
+ */
 const currentTopItem = ref(startItem);
 const gameIsWon = computed(() => currentTopItem.value.id === endItem.id);
 
+/** Past steps are composed of an item and the property used to 
+ * leave this item with a boolean indicating if this property's is backwards
+ * (true if the property links to the item false if it link from it).
+ */
 const pastSteps = ref<PastStep[]>([]);
 const pastStepsKey = computed(() => pastSteps.value.map(
   ({ item, exitProperty }) => ([item.id, exitProperty.backward, exitProperty.id].join('-'))
 ).join(','));
 
+/**
+ * Index of the selected item in the array made out of the past steps' items
+ * and the current top item at the end.
+ */
 const selectedIndex = ref(0);
 const selectedPastStep = computed<PastStep | undefined>(() => pastSteps.value[selectedIndex.value]);
+/**
+ * When the value of this computed variable changes, if its new value is not 
+ * undefined, the currentlyBackward state variable takes this value.
+ */
 const selectedPastStepExitedBackward = computed<boolean | undefined>(
   () => (pastSteps.value[selectedIndex.value] ?? undefined)?.exitProperty.backward
 );
@@ -70,8 +94,17 @@ watch(selectedPastStepExitedBackward, value => {
     currentlyBackward.value = value;
   }
 });
+/**
+ * Item for which next items are currently shown.
+ */
 const selectedItem = computed(() => selectedPastStep.value?.item ?? currentTopItem.value);
 
+/**
+ * When a next step is chosen, some past steps can be discarded (if the selected item belonged
+ * to a past step). Then, a past step is made out of the selected item, the chosen property
+ * and the chosen item becomes the current top item and the index of the currently selected 
+ * item is incremented, so the current top item becomes the selected item.
+ */
 const stepAdvanceHandler = ({ exitProperty, newTopItem }: { exitProperty: Property, newTopItem: Item }) => {
   pastSteps.value = [
     ...pastSteps.value.slice(0, selectedIndex.value),
@@ -82,7 +115,14 @@ const stepAdvanceHandler = ({ exitProperty, newTopItem }: { exitProperty: Proper
   ];
   currentTopItem.value = newTopItem;
   selectedIndex.value++;
-}
+};
+
+/**
+ * When a past step is chosen, the index of the currently selected item changes.
+ */
+const stepBackHandler = (i: number) => {
+  selectedIndex.value = i;
+};
 
 onBeforeRouteLeave((to, from, next) => {
   if (pastSteps.value.length > 0 && !confirm(t("quitGuard"))) {
@@ -108,7 +148,6 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <!-- <EndModal v-if="gameIsWon" :past-steps="pastSteps" :end-item="endItem"></EndModal> -->
   <TheHeader>
     <HomeLink></HomeLink>
     <div></div>
@@ -122,9 +161,9 @@ onBeforeUnmount(() => {
     <WikidataLink :item-url="selectedItem.url" :key="selectedItem.url"></WikidataLink>
   </TheHeader>
   <main>
-    <TheGameBreadcrumb v-if="data" @step-back="(i: number) => selectedIndex = i" :past-steps="pastSteps"
-      :selected-index="selectedIndex" :current-top-item="currentTopItem" :end-item="endItem"
-      :currently-backward="currentlyBackward" :game-is-won="gameIsWon"
+    <TheGameBreadcrumb v-if="data" @step-back="stepBackHandler" :past-steps="pastSteps" :selected-index="selectedIndex"
+      :current-top-item="currentTopItem" :end-item="endItem" :currently-backward="currentlyBackward"
+      :game-is-won="gameIsWon"
       :key="[pastStepsKey, selectedIndex, currentTopItem.id, endItem.id, currentlyBackward, gameIsWon].join('_')">
     </TheGameBreadcrumb>
     <transition name="fade" mode="out-in">
