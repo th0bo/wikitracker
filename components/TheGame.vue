@@ -92,6 +92,19 @@ onBeforeRouteLeave((to, from, next) => {
   }
 });
 
+const beforeUnloadListener = (event: BeforeUnloadEvent) => {
+  if (pastSteps.value.length > 0) {
+    event.preventDefault();
+    event.returnValue = t("quitGuard");
+  }
+};
+onBeforeMount(() => {
+  window.window.addEventListener("beforeunload", beforeUnloadListener);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("beforeunload", beforeUnloadListener);
+});
+
 </script>
 
 <template>
