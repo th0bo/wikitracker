@@ -10,7 +10,7 @@ const { pastSteps, selectedIndex, currentTopItem, endItem, currentlyBackward, ga
   gameIsWon: boolean,
 }>();
 
-const currentTopItemIndex = computed(() => pastSteps.values.length);
+const currentTopItemIndex = computed(() => pastSteps.length);
 </script>
 
 <template>
