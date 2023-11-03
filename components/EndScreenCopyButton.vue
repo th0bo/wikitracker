@@ -30,6 +30,7 @@ svg {
 path {
   fill: var(--blue);
   transform-origin: center;
+  transition: translate 0.2s ease-in-out;
 }
 
 path:nth-child(1) {
@@ -39,28 +40,20 @@ path:nth-child(2) {
   /* translate: 10% 10%; */
   filter: brightness(80%);
   scale: 0.8;
-  animation: slide-right 0.8s ease-in-out forwards;
+  translate: 8%;
+  /* animation: slide-right 0.8s ease-in-out forwards; */
 }
 path:nth-child(3) {
   filter: brightness(120%);
-  animation: slide-left 0.8s ease-in-out forwards;
+  translate: -8%;
+  /* animation: slide-left 0.8s ease-in-out forwards; */
 }
 
-@keyframes slide-right {
-  from {
-    translate: 0%;
-  }
-  to {
-    translate: 10%;
-  }
+button:hover path:nth-child(2), button:focus path:nth-child(2) {
+  translate: 12%;
 }
 
-@keyframes slide-left {
-  from {
-    translate: 0%;
-  }
-  to {
-    translate: -10%;
-  }
+button:hover path:nth-child(3), button:focus path:nth-child(3) {
+  translate: -12%;
 }
 </style>
