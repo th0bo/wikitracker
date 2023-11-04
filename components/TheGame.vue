@@ -166,11 +166,15 @@ onBeforeUnmount(() => {
       :game-is-won="gameIsWon"
       :key="[pastStepsKey, selectedIndex, currentTopItem.id, endItem.id, currentlyBackward, gameIsWon].join('_')">
     </TheGameBreadcrumb>
-    <transition name="fade" mode="out-in">
-      <EndScreen v-if="gameIsWon" :past-steps="pastSteps" :end-item="endItem"></EndScreen>
-      <OptionsList v-else @step-advance="stepAdvanceHandler" :currently-backward="currentlyBackward"
-        :selected-item="selectedItem" :key="[selectedItem.id, currentlyBackward].join('_')"></OptionsList>
-    </transition>
+    <div id="options-container">
+      <div class="fade-buffer">
+      </div>
+      <transition name="fade" mode="out-in">
+        <EndScreen v-if="gameIsWon" :past-steps="pastSteps" :end-item="endItem"></EndScreen>
+        <OptionsList v-else @step-advance="stepAdvanceHandler" :currently-backward="currentlyBackward"
+          :selected-item="selectedItem" :key="[selectedItem.id, currentlyBackward].join('_')"></OptionsList>
+      </transition>
+    </div>
   </main>
 </template>
 
@@ -178,6 +182,18 @@ onBeforeUnmount(() => {
 main {
   display: grid;
   grid-template-rows: min-content auto;
+}
+
+#options-container {
+  position: relative;
+  overflow-y: auto;
+}
+
+.fade-buffer {
+  height: 14px;
+  position: sticky;
+  top: 0;
+  background: linear-gradient(to top, transparent, var(--background));
 }
 
 .fade-enter-active,
