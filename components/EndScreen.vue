@@ -49,7 +49,7 @@ li {
 }
 
 .outer > div > button {
-  width: 2.5em;
+  width: 2.5rem;
 }
 
 input {

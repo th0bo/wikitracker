@@ -41,7 +41,6 @@ const propertyDisplay = (() => {
 
 <style scoped>
 .line {
-  font-size: 20px;
   display: grid;
   grid-template-columns: 0 7fr;
   white-space: nowrap;
@@ -76,7 +75,7 @@ const propertyDisplay = (() => {
 @media (min-width: 420px) {
   .line {
     grid-template-columns: 5fr 7fr;
-    column-gap: 32px;
+    column-gap: 1.5rem;
   }
 
   .line.backward {

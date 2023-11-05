@@ -190,7 +190,7 @@ main {
 }
 
 .fade-buffer {
-  height: 14px;
+  height: 0.75rem;
   position: sticky;
   top: 0;
   background: linear-gradient(to top, transparent, var(--background));

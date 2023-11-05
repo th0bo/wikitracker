@@ -34,7 +34,7 @@ const currentTopItemIndex = computed(() => pastSteps.length);
 
 <style scoped>
 nav {
-  font-size: 28px;
+  font-size: 1.5rem;
 }
 
 nav ol {
@@ -75,7 +75,7 @@ nav ol li:last-child {
 nav ol li:not(:last-child)::after {
   content: "→";
   color: var(--secondary);
-  margin: 0 8px;
+  margin: 0 0.5rem;
 }
 
 nav ol li.backward:not(:last-child)::after {
