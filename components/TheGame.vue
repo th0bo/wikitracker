@@ -189,6 +189,15 @@ main {
   overflow-y: auto;
 }
 
+
+div#options-container::-webkit-scrollbar {
+  width: 0.5rem;
+  background: var(--blue);
+}
+div#options-container::-webkit-scrollbar-thumb {
+  background: var(--text);
+}
+
 .fade-buffer {
   height: 0.75rem;
   position: sticky;

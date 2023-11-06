@@ -102,11 +102,4 @@ const { data: itemsGroups, pending } = useFetch(buildSparqlRequest(query), {
 #spinner {
   width: min(35vh, 35vw);
 }
-div::-webkit-scrollbar {
-  width: 3px;
-  background: var(--darkgrey);
-}
-div::-webkit-scrollbar-thumb {
-  background: var(--secondary);
-}
 </style>
