@@ -69,5 +69,6 @@ export default defineNuxtConfig({
         // vueI18n: './vue-i18n.options.ts'
       },
     ],
+    '@vite-pwa/nuxt',
   ],
 });
