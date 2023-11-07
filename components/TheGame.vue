@@ -191,11 +191,11 @@ main {
 
 
 div#options-container::-webkit-scrollbar {
-  width: 0.5rem;
-  background: var(--blue);
+  width: 0.4rem;
+  background: var(--tertiary);
 }
 div#options-container::-webkit-scrollbar-thumb {
-  background: var(--text);
+  background: var(--blue);
 }
 
 .fade-buffer {

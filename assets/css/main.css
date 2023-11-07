@@ -9,6 +9,7 @@
   --background: var(--light);
   --text: var(--dark);
   --secondary: var(--darkgrey);
+  --tertiary: var(--lightgrey);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,6 +19,7 @@
     --background: var(--dark);
     --text: var(--light);
     --secondary: var(--lightgrey);
+    --tertiary: var(--darkgrey);
   }
 }
 
