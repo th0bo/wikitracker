@@ -404,6 +404,10 @@ rect {
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: forwards;
+  animation-play-state: paused;
+}
+button:hover rect, button:focus rect {
+  animation-play-state: running;
 }
 rect:nth-child(1) {
   animation-name: dot1;
