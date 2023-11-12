@@ -13,5 +13,6 @@
   "nothing": "Nothing to see here",
   "quitGuard": "You have a game in progress. Are you sure you want to leave ?",
   "play": "Play",
-  "randomPick": "Pick at random"
+  "randomPick": "Pick at random",
+  "notAllItems": "All items could not be loaded"
 }
