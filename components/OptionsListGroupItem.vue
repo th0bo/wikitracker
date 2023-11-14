@@ -45,6 +45,8 @@ const propertyDisplay = (() => {
   grid-template-columns: 0 7fr;
   white-space: nowrap;
   cursor: pointer;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 .line:hover .item {
@@ -76,6 +78,8 @@ const propertyDisplay = (() => {
   .line {
     grid-template-columns: 5fr 7fr;
     column-gap: 1.5rem;
+    padding-top: unset;
+    padding-bottom: unset;
   }
 
   .line.backward {
