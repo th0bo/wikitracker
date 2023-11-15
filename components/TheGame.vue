@@ -125,7 +125,7 @@ const stepBackHandler = (i: number) => {
 };
 
 onBeforeRouteLeave((to, from, next) => {
-  if (pastSteps.value.length > 0 && !confirm(t("quitGuard"))) {
+  if (pastSteps.value.length > 0 && !gameIsWon.value && !confirm(t("quitGuard"))) {
     next(false);
   } else {
     next();
@@ -133,7 +133,7 @@ onBeforeRouteLeave((to, from, next) => {
 });
 
 const beforeUnloadListener = (event: BeforeUnloadEvent) => {
-  if (pastSteps.value.length > 0) {
+  if (pastSteps.value.length > 0 && !gameIsWon.value) {
     event.preventDefault();
     event.returnValue = t("quitGuard");
   }
