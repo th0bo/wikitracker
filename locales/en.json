@@ -6,6 +6,7 @@
     }
   },
   "about": "About Page",
+  "aboutText": "WikiTracker is a reflexion game based on the WikiData semantic database.",
   "index": "Index Page",
   "welcome": "Welcome",
   "congrats": "Congratulations !",

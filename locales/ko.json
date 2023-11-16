@@ -1,4 +1,5 @@
 {
+  "aboutText": "WikiTracker는 WikiData 시맨틱 데이터베이스를 기반으로 하는 리플렉션 게임입니다.",
   "notAllItems": "모든 항목을 로드할 수 없습니다.",
   "randomPick": "무작위로 선택",
   "play": "플레이",
