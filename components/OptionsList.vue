@@ -22,6 +22,8 @@ const { currentlyBackward, selectedItem } = defineProps<{ currentlyBackward: boo
 
 const locale = useI18n().locale.value;
 
+const emit = defineEmits(['step-advance', 'loading-end']);
+
 const exclusionClause = excludedProperties.map(p => 'wdt:' + p).join(', ');
 
 const relation = currentlyBackward ? `?currentItem ?prop wd:${selectedItem.id}.` : `wd:${selectedItem.id} ?prop ?currentItem.`;
@@ -72,6 +74,12 @@ const { data: itemsGroups, pending } = useFetch(buildSparqlRequest(query), {
     }
     const itemsGroups = [...propertyIdToItemsGroup.values()];
     return itemsGroups;
+  }
+});
+
+watch(pending, value => {
+  if (value === false) {
+    emit("loading-end");
   }
 });
 </script>

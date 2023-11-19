@@ -2,7 +2,7 @@
 const timeUnit = 800;
 let loading = false;
 
-const { backward } = defineProps<{ backward: boolean }>();
+const { backward } = defineProps<{ backward: boolean, pendingDirectionChange: boolean }>();
 const { dir } = useI18n().localeProperties.value;
 const rtl = dir === 'rtl';
 
@@ -43,9 +43,9 @@ const handleClick = () => {
       <path class="frame" d="M 100 0 l 100 100 l -100 100 l -100 -100 Z M 100 10 l 90 90 l -90 90 l -90 -90 Z"></path>
       <g>
         <rect :class="{ zooming: zooming }" x="90" y="90" width="20" height="20" transform-origin="100 100"></rect>
-        <path class="right arrow" :class="{ shrinked: direction !== 1 }" stroke-width="10" transform-origin="100 100">
+        <path class="right arrow" :class="{ shrinked: pendingDirectionChange || direction !== 1 }" stroke-width="10" transform-origin="100 100">
         </path>
-        <path class="left arrow" :class="{ shrinked: direction !== -1 }" stroke-width="10" transform-origin="100 100">
+        <path class="left arrow" :class="{ shrinked: pendingDirectionChange || direction !== -1 }" stroke-width="10" transform-origin="100 100">
         </path>
       </g>
     </svg>

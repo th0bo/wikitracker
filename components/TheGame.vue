@@ -94,6 +94,14 @@ watch(selectedPastStepExitedBackward, value => {
     currentlyBackward.value = value;
   }
 });
+const pendingDirectionChange = ref(false);
+watch(currentlyBackward, value => {
+  pendingDirectionChange.value = true;
+});
+const loadingEndHandler = () => {
+  pendingDirectionChange.value = false;
+}
+
 /**
  * Item for which next items are currently shown.
  */
@@ -153,7 +161,7 @@ onBeforeUnmount(() => {
     <div></div>
     <Transition mode="out-in" name="turn">
       <DirectionButton @toggle-backward="currentlyBackward = !currentlyBackward" :backward="currentlyBackward"
-        :key="[currentlyBackward].join('_')">
+        :pending-direction-change="pendingDirectionChange" :key="[currentlyBackward, pendingDirectionChange].join('_')">
       </DirectionButton>
     </Transition>
     <div></div>
@@ -171,8 +179,9 @@ onBeforeUnmount(() => {
       </div>
       <transition name="fade" mode="out-in">
         <EndScreen v-if="gameIsWon" :past-steps="pastSteps" :end-item="endItem"></EndScreen>
-        <OptionsList v-else @step-advance="stepAdvanceHandler" :currently-backward="currentlyBackward"
-          :selected-item="selectedItem" :key="[selectedItem.id, currentlyBackward].join('_')"></OptionsList>
+        <OptionsList v-else @step-advance="stepAdvanceHandler" @loading-end="loadingEndHandler"
+          :currently-backward="currentlyBackward" :selected-item="selectedItem"
+          :key="[selectedItem.id, currentlyBackward].join('_')"></OptionsList>
       </transition>
     </div>
   </main>
@@ -194,6 +203,7 @@ div#options-container::-webkit-scrollbar {
   width: 0.4rem;
   background: var(--tertiary);
 }
+
 div#options-container::-webkit-scrollbar-thumb {
   background: var(--blue);
 }
