@@ -159,7 +159,7 @@ onBeforeUnmount(() => {
   <TheHeader>
     <HomeLink></HomeLink>
     <div></div>
-    <Transition mode="out-in" name="turn">
+    <Transition mode="out-in" name="turn" :duration="300">
       <DirectionButton @toggle-backward="currentlyBackward = !currentlyBackward" :backward="currentlyBackward"
         :pending-direction-change="pendingDirectionChange" :key="[currentlyBackward, pendingDirectionChange].join('_')">
       </DirectionButton>

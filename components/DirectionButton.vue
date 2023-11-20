@@ -43,9 +43,9 @@ const handleClick = () => {
       <path class="frame" d="M 100 0 l 100 100 l -100 100 l -100 -100 Z M 100 10 l 90 90 l -90 90 l -90 -90 Z"></path>
       <g>
         <rect :class="{ zooming: zooming }" x="90" y="90" width="20" height="20" transform-origin="100 100"></rect>
-        <path class="right arrow" :class="{ shrinked: pendingDirectionChange || direction !== 1 }" stroke-width="10" transform-origin="100 100">
+        <path class="right arrow" :class="{ main: !pendingDirectionChange && direction === 1 }" stroke-width="10" transform-origin="100 100">
         </path>
-        <path class="left arrow" :class="{ shrinked: pendingDirectionChange || direction !== -1 }" stroke-width="10" transform-origin="100 100">
+        <path class="left arrow" :class="{ main: !pendingDirectionChange && direction === -1 }" stroke-width="10" transform-origin="100 100">
         </path>
       </g>
     </svg>
@@ -105,34 +105,24 @@ rect.zooming {
   stroke-linecap: square;
   fill: none;
   transition: d 300ms;
-  d: path("M 90 60 l 40 40 l -40 40");
+  d: path("M 120 90 l 10 10 l -10 10");
 }
 
 .left.arrow {
   scale: -1 1;
 }
 
-.shrinked {
-  d: path("M 120 90 l 10 10 l -10 10");
-}
-
-.turn-enter-active .arrow {
-  transition-delay: 100ms;
-  /* transition-timing-function: ease-in; */
-}
-
-.turn-enter-active .arrow.shrinked {
-  transition-delay: 0ms;
-  /* transition-timing-function: ease-out; */
-}
-
-.turn-enter-from .arrow,
-.turn-leave-to .arrow {
-  d: path("M 120 90 l 10 10 l -10 10");
-}
-
-.turn-enter-from .arrow.shrinked,
-.turn-leave-to .arrow.shrinked {
+.main {
   d: path("M 90 60 l 40 40 l -40 40");
+}
+
+.turn-enter-to .arrow.main,
+.turn-leave-from .arrow.main {
+  d: path("M 90 60 l 40 40 l -40 40");
+}
+
+.turn-enter-from .arrow.main,
+.turn-leave-to .arrow.main {
+  d: path("M 120 90 l 10 10 l -10 10");
 }
 </style>
