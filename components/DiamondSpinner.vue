@@ -10,29 +10,33 @@
 svg {
   aspect-ratio: 1/1;
   width: 100%;
+  scale: -1 1;
 }
 
 @keyframes spin {
   0% {
     d: path("M 100 10 l 1 1");
   }
-  25% {
+  24% {
     d: path("M 100 10 l 90 90");
   }
-  26% {
+  24.1% {
     d: path("M 100 10 l 90 90 l -1 1");
   }
-  50% {
+  48% {
     d: path("M 100 10 l 90 90 l -90 90")
   }
-  51% {
+  48.1% {
     d: path("M 100 10 l 90 90 l -90 90 l -1 -1")
   }
-  75% {
+  72% {
     d: path("M 100 10 l 90 90 l -90 90 l -90 -90")
   }
-  76% {
+  72.1% {
     d: path("M 100 10 l 90 90 l -90 90 l -90 -90 l 1 -1")
+  }
+  96% {
+    d: path("M 100 10 l 90 90 l -90 90 l -90 -90 l 90 -90")
   }
   100% {
     d: path("M 100 10 l 90 90 l -90 90 l -90 -90 l 90 -90")
@@ -43,7 +47,7 @@ path {
   stroke: var(--blue);
   fill: none;
   stroke-linecap: square;
-  animation: 1.2s linear infinite alternate spin;
+  animation: 1.2s linear infinite alternate-reverse spin;
 }
 
 @keyframes back {
