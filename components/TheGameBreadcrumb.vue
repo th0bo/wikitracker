@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Item, PastStep } from '../types/game';
+import type { Item, PastStep } from '../types/game';
 
 const { pastSteps, selectedIndex, currentTopItem, endItem, currentlyBackward, gameIsWon } = defineProps<{
   pastSteps: PastStep[],

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Property, Item } from '../types/game';
+import type { Property, Item } from '../types/game';
 
 const { property, items } = defineProps<{ property: Property, items: Item[] }>();
 

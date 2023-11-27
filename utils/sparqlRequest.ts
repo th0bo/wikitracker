@@ -1,4 +1,4 @@
-import { QueryData } from '../types/wikidata';
+import type { QueryData } from '../types/wikidata';
 
 const limit = 200;
 
