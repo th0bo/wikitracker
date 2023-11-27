@@ -25,29 +25,31 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-          cache: npm
-      - name: Install dependencies
-        run: npm ci --loglevel verbose
-      - name: Static HTML export with Nuxt
-        env:
-          DEEPL_AUTH_KEY: ${{ secrets.DEEPL_AUTH_KEY }}
-        run: npm run generate --loglevel verbose
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./dist
-
-  # Deployment job
+    - uses: actions/checkout@v3
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+    - name: Install dependencies
+      run: pnpm install
+    - name: Static HTML export with Nuxt
+      env:
+        DEEPL_AUTH_KEY: ${{ secrets.DEEPL_AUTH_KEY }}
+      run: npm run generate --loglevel verbose
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: ./dist
   deploy:
     environment:
       name: github-pages
