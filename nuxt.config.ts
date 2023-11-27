@@ -12,6 +12,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
   modules: [
+    '@nuxtjs/robots',
     [
       "@nuxtjs/i18n",
       {
