@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     dirs: ["utils"],
   },
   app: {
-    baseURL: process.env.NODE_ENV === "production" ? "/wikitracker/" : "",
+    baseURL: process.env.NODE_ENV === "production" && process.env.GITHUB_ACTIONS === 'true' ? "/wikitracker/" : "",
   },
   typescript: {
     strict: true,
