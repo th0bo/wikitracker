@@ -12,14 +12,12 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/i18n": "^8.0.0-rc.4",
+    "@nuxtjs/robots": "^3.0.0",
     "@types/node": "^18.17.3",
     "flat": "^6.0.1",
     "node-fetch": "^3.3.2",
     "nuxt": "^3.6.5",
     "typescript": "^5.2.2",
     "vue-tsc": "^1.8.22"
-  },
-  "dependencies": {
-    "@nuxtjs/robots": "^3.0.0"
   }
 }
