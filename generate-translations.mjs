@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import jsonFormat from "json-format";
 import { Headers } from "node-fetch";
 import * as process from "process";
 import * as fs from "fs";
@@ -73,7 +74,13 @@ for (const targetLocale of targetLocales) {
       ),
       ...flatTargetLocale,
     });
-    fs.writeFileSync(targetLocaleFilePath, JSON.stringify(localeObject));
+    fs.writeFileSync(
+      targetLocaleFilePath,
+      jsonFormat(localeObject, {
+        type: "space",
+        size: 2,
+      })
+    );
   } catch (e) {
     console.error(
       `Unable to retrieve DeepL translations for locale ${targetLocale}`

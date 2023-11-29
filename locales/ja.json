@@ -4,7 +4,12 @@
   "randomPick": "ランダムに選ぶ",
   "play": "プレー",
   "quitGuard": "あなたは試合中です。本当に帰りたいのですか？",
-  "pages": { "title": { "top": "トップ", "about": "このサイトについて" } },
+  "pages": {
+    "title": {
+      "top": "トップ",
+      "about": "このサイトについて"
+    }
+  },
   "about": "ページについて",
   "index": "インデックスページ",
   "welcome": "ようこそ",

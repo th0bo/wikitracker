@@ -4,7 +4,12 @@
   "randomPick": "Elige al azar",
   "play": "Jugar",
   "quitGuard": "Tienes una partida en curso. ¿Estás seguro de que quieres irte?",
-  "pages": { "title": { "about": "sobre este sitio web", "top": "Top" } },
+  "pages": {
+    "title": {
+      "about": "sobre este sitio web",
+      "top": "Top"
+    }
+  },
   "about": "Acerca de la página",
   "index": "Índice",
   "welcome": "Bienvenido",
