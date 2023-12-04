@@ -19,7 +19,7 @@ const copy = () => {
       </li>
     </ol>
     <div>
-      <input type="text" :value="location" disabled="true" :aria-label="$t('sharePath')" />
+      <div id="location" :aria-label="$t('sharePath')">{{ location }}</div>
       <EndScreenCopyButton @copy-link="copy"></EndScreenCopyButton>
     </div>
   </div>
@@ -46,15 +46,15 @@ li {
   display: flex;
   height: min-content;
   justify-content: center;
+  align-items: center;
 }
 
 .outer > div > button {
   width: 2.5rem;
 }
 
-input {
-  all: unset;
-  flex: auto;
+#location {
+  padding: 0 1rem;
 }
 
 button {
