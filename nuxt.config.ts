@@ -1,9 +1,18 @@
+const baseUrl = process.env.NODE_ENV === "production" && process.env.GITHUB_ACTIONS === 'true' ? "/wikitracker/" : "/";
+
 export default defineNuxtConfig({
   imports: {
     dirs: ["utils"],
   },
   app: {
-    baseURL: process.env.NODE_ENV === "production" && process.env.GITHUB_ACTIONS === 'true' ? "/wikitracker/" : "",
+    baseURL: baseUrl,
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: baseUrl + 'favicon-16x16.png' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: baseUrl + 'favicon-32x32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '48x48', href: baseUrl + 'favicon-48x48.png' },
+      ],
+    }
   },
   typescript: {
     strict: true,
