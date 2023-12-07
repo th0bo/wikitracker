@@ -1,4 +1,24 @@
-const baseUrl = process.env.NODE_ENV === "production" && process.env.GITHUB_ACTIONS === 'true' ? "/wikitracker/" : "/";
+import * as fs from "fs";
+import * as path from "path";
+
+const baseUrl =
+  process.env.NODE_ENV === "production" && process.env.GITHUB_ACTIONS === "true"
+    ? "/wikitracker/"
+    : "/";
+
+const link = fs
+  .readdirSync(path.join(__dirname, "public", "favicon"))
+  .map((fileName) => ({ fileName, matcher: fileName.match(/\d+x\d+/) }))
+  .filter(({ matcher }) => matcher !== null)
+  .map(({ fileName, matcher }) => {
+    const sizes = (matcher as RegExpMatchArray)[0];
+    return {
+      rel: "icon",
+      type: "image/png",
+      sizes,
+      href: `${baseUrl}favicon/${fileName}`,
+    };
+  });
 
 export default defineNuxtConfig({
   imports: {
@@ -7,12 +27,8 @@ export default defineNuxtConfig({
   app: {
     baseURL: baseUrl,
     head: {
-      link: [
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: baseUrl + 'favicon-16x16.png' },
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: baseUrl + 'favicon-32x32.png' },
-        { rel: 'icon', type: 'image/png', sizes: '48x48', href: baseUrl + 'favicon-48x48.png' },
-      ],
-    }
+      link,
+    },
   },
   typescript: {
     strict: true,
@@ -21,7 +37,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
   modules: [
-    '@nuxtjs/robots',
+    "@nuxtjs/robots",
     [
       "@nuxtjs/i18n",
       {

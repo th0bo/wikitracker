@@ -4,10 +4,9 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "pregenerate": "node generate-excluded-properties.mjs & node generate-favicons.mjs & node generate-translations.mjs",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "node generate-excluded-properties.mjs & node generate-favicons.js & node generate-translations.mjs & nuxt prepare"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
