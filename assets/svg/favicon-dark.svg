@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 270">
+  <path fill-rule="evenodd"
+    d="M 135 0 l 135 135 l -135 135 l -135 -135 z"
+    fill="hsl(0.56turn, 100%, 40%)" />
+  <path
+    d="M 0 135 l 60 -60 h 105 v 120 h -105 z"
+    fill="hsl(0turn, 100%, 45%)" />
+  <path
+    d="M 165 75 l 60 60 l -60 60 l -60 -60 z"
+    fill="hsl(0.42turn, 50%, 40%)" />
+</svg>

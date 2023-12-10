@@ -7,7 +7,7 @@ const baseUrl =
     : "/";
 
 const link = fs
-  .readdirSync(path.join(__dirname, "public", "favicon"))
+  .readdirSync(path.join(__dirname, "public", "favicon", "light"))
   .map((fileName) => ({ fileName, matcher: fileName.match(/\d+x\d+/) }))
   .filter(({ matcher }) => matcher !== null)
   .map(({ fileName, matcher }) => {
@@ -16,7 +16,7 @@ const link = fs
       rel: "icon",
       type: "image/png",
       sizes,
-      href: `${baseUrl}favicon/${fileName}`,
+      href: `${baseUrl}favicon/light/${fileName}`,
     };
   });
 
