@@ -4,10 +4,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Pregenerate",
+      "name": "Postinstall",
       "type": "node-terminal",
       "request": "launch",
-      "command": "DEEPL_AUTH_KEY='' npm run pregenerate"
+      "envFile": "${workspaceFolder}/.env",
+      "command": "npm run postinstall"
     },
     {
       "name": "Launch",
