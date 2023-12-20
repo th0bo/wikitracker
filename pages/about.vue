@@ -22,7 +22,7 @@ const rtl = dir === 'rtl';
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 body {
   margin: 0;
 }

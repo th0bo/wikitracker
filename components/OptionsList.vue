@@ -100,7 +100,7 @@ watch(pending, value => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .loading {
   display: flex;
   justify-content: center;

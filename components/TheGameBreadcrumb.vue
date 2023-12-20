@@ -32,7 +32,7 @@ const currentTopItemIndex = computed(() => pastSteps.length);
   </nav>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 nav {
   font-size: 1.5rem;
 }

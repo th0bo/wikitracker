@@ -39,7 +39,7 @@ const propertyDisplay = (() => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .line {
   display: grid;
   grid-template-columns: 0 7fr;

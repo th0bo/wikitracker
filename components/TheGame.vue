@@ -187,7 +187,7 @@ onBeforeUnmount(() => {
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 main {
   display: grid;
   grid-template-rows: min-content auto;

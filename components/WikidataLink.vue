@@ -20,7 +20,7 @@ const url = itemUrl ?? 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
   </NuxtLink>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 svg {
   aspect-ratio: 1/1;
   width: 100%;

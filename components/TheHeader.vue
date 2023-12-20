@@ -4,7 +4,7 @@
   </header>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

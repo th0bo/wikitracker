@@ -52,7 +52,7 @@ const handleClick = () => {
   </button>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 button {
   all: unset;
   cursor: pointer;
