@@ -27,6 +27,7 @@ export default defineNuxtConfig({
   app: {
     baseURL: baseUrl,
     head: {
+      title: "WikiTracker",
       link,
     },
   },
