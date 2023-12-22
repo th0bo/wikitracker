@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PastStep, Item } from '../types/game';
+import type { PastStep, Item } from '~/types/game';
 
 const { pastSteps, endItem } = defineProps<{ pastSteps: PastStep[], endItem: Item }>();
 const location = window.location.toString();
@@ -25,7 +25,7 @@ const copy = () => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .outer {
   display: grid;
   text-align: center;
@@ -42,14 +42,14 @@ li {
   list-style: none;
 }
 
-.outer > div {
+.outer>div {
   display: flex;
   height: min-content;
   justify-content: center;
   align-items: center;
 }
 
-.outer > div > button {
+.outer>div>button {
   width: 2.5rem;
 }
 

@@ -13,7 +13,7 @@
   </NuxtLinkLocale>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 svg {
   aspect-ratio: 1/1;
   width: 100%;
