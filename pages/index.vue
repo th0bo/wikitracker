@@ -22,12 +22,12 @@ const randomPick = () => {
 <template>
   <div class="wrapper" :class="{ dirRtl: rtl }">
     <TheHeader>
-      <HomeLink></HomeLink>
+      <HeaderHomeLink></HeaderHomeLink>
       <div></div>
       <div></div>
       <div></div>
-      <InformationLink></InformationLink>
-      <WikidataLink></WikidataLink>
+      <HeaderInformationLink></HeaderInformationLink>
+      <HeaderWikidataLink></HeaderWikidataLink>
     </TheHeader>
     <main>
       <div>

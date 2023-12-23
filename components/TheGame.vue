@@ -157,16 +157,16 @@ onBeforeUnmount(() => {
 
 <template>
   <TheHeader>
-    <HomeLink></HomeLink>
+    <HeaderHomeLink></HeaderHomeLink>
     <div></div>
     <Transition mode="out-in" name="turn" :duration="300">
-      <DirectionButton @toggle-backward="currentlyBackward = !currentlyBackward" :backward="currentlyBackward"
+      <HeaderDirectionButton @toggle-backward="currentlyBackward = !currentlyBackward" :backward="currentlyBackward"
         :pending-direction-change="pendingDirectionChange" :key="[currentlyBackward, pendingDirectionChange].join('_')">
-      </DirectionButton>
+      </HeaderDirectionButton>
     </Transition>
     <div></div>
-    <InformationLink></InformationLink>
-    <WikidataLink :item-url="selectedItem.url" :key="selectedItem.url"></WikidataLink>
+    <HeaderInformationLink></HeaderInformationLink>
+    <HeaderWikidataLink :item-url="selectedItem.url" :key="selectedItem.url"></HeaderWikidataLink>
   </TheHeader>
   <main>
     <TheGameBreadcrumb v-if="data" @step-back="stepBackHandler" :past-steps="pastSteps" :selected-index="selectedIndex"

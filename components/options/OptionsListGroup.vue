@@ -11,12 +11,12 @@ const footerItem = bodyItems.pop();
 </script>
 
 <template>
-  <OptionsListGroupItem @step-advance="payload => emit('step-advance', payload)" :property="property" :item="headerItem"
+  <OptionsListGroupItem @step-advance="(payload: any) => emit('step-advance', payload)" :property="property" :item="headerItem"
     position="header"></OptionsListGroupItem>
-  <OptionsListGroupItem v-for="item in bodyItems" @step-advance="payload => emit('step-advance', payload)" :key="item.id"
+  <OptionsListGroupItem v-for="item in bodyItems" @step-advance="(payload: any) => emit('step-advance', payload)" :key="item.id"
     :property="property" :item="item" position="body">
   </OptionsListGroupItem>
-  <OptionsListGroupItem v-if="footerItem" @step-advance="payload => emit('step-advance', payload)" :property="property"
+  <OptionsListGroupItem v-if="footerItem" @step-advance="(payload: any) => emit('step-advance', payload)" :property="property"
     :item="footerItem" position="footer">
   </OptionsListGroupItem>
 </template>

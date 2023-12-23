@@ -94,7 +94,7 @@ watch(pending, value => {
     </div>
     <DiamondSpinner id="spinner" v-if="pending"></DiamondSpinner>
     <OptionsListGroup v-else v-for="itemsGroup in itemsGroups" :key="itemsGroup.property.id"
-      @step-advance="payload => $emit('step-advance', payload)" :property="itemsGroup.property"
+      @step-advance="(payload: any) => $emit('step-advance', payload)" :property="itemsGroup.property"
       :items="itemsGroup.items">
     </OptionsListGroup>
   </div>
