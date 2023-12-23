@@ -1,14 +1,16 @@
 <template>
-  <NuxtLinkLocale to="index">    
+  <NuxtLinkLocale to="index">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-      <path class="edges" stroke-width="10"></path>
-      <g class="nodes">
-        <path transform-origin="100 100"></path>
-        <path transform-origin="100 100"></path>
-        <path transform-origin="100 100"></path>
-        <path transform-origin="100 100"></path>
-        <path transform-origin="100 100"></path>
-      </g>
+      <path d="M 40 100 l 40 -40 h 40 l 40 40 l -40 40 h -40 Z" class="red" style="visibility: hidden;" />
+      <!-- <path d="M 60 100 l 40 -40 h 20 l 40 40 l -40 40 h -20 Z" class="blue" /> -->
+      <path d="M 110 60 l 40 40 l -40 40 l -40 -40 Z" class="green" />
+      <path d="M 0 100 l 15 -15 h 70 l -15 15 l 15 15 h -70 Z" class="red" />
+      <path fill-rule="evenodd" d="M 100 0 l 100 100 l -100 100 l -100 -100 Z M 100 20 l 80 80 l -80 80 l -80 -80 Z"
+        class="blue" />
+      <!-- <path d="M 120 60 l 40 40 l -40 40 l -40 -40 Z" class="blue" /> -->
+      <!-- <path d="M 120 60 l 20 20 l -20 20 l -20 -20 Z" class="green" />
+      <path d="M 120 100 l 20 20 l -20 20 l -20 -20 Z" class="green" />
+      <path d="M 100 80 l 20 20 l -20 20 l -20 -20 Z" class="red" /> -->
     </svg>
   </NuxtLinkLocale>
 </template>
