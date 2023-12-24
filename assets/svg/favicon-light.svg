@@ -1,11 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 270">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <path fill-rule="evenodd"
-    d="M 135 0 l 135 135 l -135 135 l -135 -135 z"
+    d="M 100 40 l -80 80 l -20 -20 l 100 -100 l 100 100 l -20 20 l -80 -80 Z"
     fill="hsl(0.56turn, 100%, 30%)" />
-  <path
-    d="M 0 135 l 60 -60 h 105 v 120 h -105 z"
-    fill="hsl(0turn, 100%, 30%)" />
-  <path
-    d="M 165 75 l 60 60 l -60 60 l -60 -60 z"
+  <path fill-rule="evenodd" d="M 100 90 l -55 55 l -20 -20 l 75 -75 l 75 75 l -20 20 Z"
     fill="hsl(0.42turn, 50%, 40%)" />
+  <path fill-rule="evenodd" d="M 100 140 l -30 30 l -20 -20 l 50 -50 l 50 50 l -20 20 Z"
+    fill="hsl(0turn, 100%, 30%)" />
 </svg>
